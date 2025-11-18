@@ -10,6 +10,10 @@ class Header extends StatelessWidget {
     Navigator.pushNamed(context, '/product');
   }
 
+  void navigateToAboutUs(BuildContext context) {
+    Navigator.pushNamed(context, '/aboutus');
+  }
+
   void placeholderCallbackForButtons() {
     // This is the event handler for buttons that don't work yet
   }
@@ -42,6 +46,7 @@ class Header extends StatelessWidget {
                     onTap: () {
                       navigateToHome(context);
                     },
+                    // Logo
                     child: Image.network(
                       'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
                       height: 18,
@@ -59,6 +64,12 @@ class Header extends StatelessWidget {
                       },
                     ),
                   ),
+                  TextButton(onPressed: () => navigateToHome(context), child: const Text('Home')),
+                  TextButton(onPressed: () => navigateToProduct(context), child: const Text('Product')),
+                  TextButton(onPressed: placeholderCallbackForButtons, child: const Text('Shop')),
+                  TextButton(onPressed: placeholderCallbackForButtons, child: const Text('The Print Shack')),
+                  TextButton(onPressed: placeholderCallbackForButtons, child: const Text('SALE!')),
+                  TextButton(onPressed: () => navigateToAboutUs(context), child: const Text('About Us')),
                   const Spacer(),
                   ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 600),
