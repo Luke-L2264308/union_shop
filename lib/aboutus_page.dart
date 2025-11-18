@@ -1,6 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class AboutUsPage  extends StatelessWidget {
+  const AboutUsPage ({super.key});
+  
   final String textDisplay = ('''Welcome to the Union Shop!
 
 We’re dedicated to giving you the very best University branded products, with a range of clothing and merchandise available to shop all year round! We even offer an exclusive personalisation service!
@@ -15,8 +18,15 @@ The Union Shop & Reception Team​​​​​​​​​.
 ''');
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('About Us Page'),
+    
+    return Scaffold(
+      body: Center(
+        child: Column(
+          children: [ const Text('About Us', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+            Text(textDisplay),
+          ],
+        ),
+      ),
     );
   }
 }
