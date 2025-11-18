@@ -64,12 +64,15 @@ class Header extends StatelessWidget {
                       },
                     ),
                   ),
-                  TextButton(onPressed: () => navigateToHome(context), child: const Text('Home')),
-                  TextButton(onPressed: () => navigateToProduct(context), child: const Text('Product')),
-                  TextButton(onPressed: placeholderCallbackForButtons, child: const Text('Shop')),
-                  TextButton(onPressed: placeholderCallbackForButtons, child: const Text('The Print Shack')),
-                  TextButton(onPressed: placeholderCallbackForButtons, child: const Text('SALE!')),
-                  TextButton(onPressed: () => navigateToAboutUs(context), child: const Text('About Us')),
+
+                  if (MediaQuery.of(context).size.width > 800) ...[
+                    TextButton(onPressed: () => navigateToHome(context), child: const Text('Home')),
+                    TextButton(onPressed: () => navigateToProduct(context), child: const Text('Product')),
+                    TextButton(onPressed: placeholderCallbackForButtons, child: const Text('Shop')),
+                    TextButton(onPressed: placeholderCallbackForButtons, child: const Text('The Print Shack')),
+                    TextButton(onPressed: placeholderCallbackForButtons, child: const Text('SALE!')),
+                    TextButton(onPressed: () => navigateToAboutUs(context), child: const Text('About Us')),
+                  ],
                   const Spacer(),
                   ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 600),
@@ -115,7 +118,8 @@ class Header extends StatelessWidget {
                           ),
                           onPressed: placeholderCallbackForButtons,
                         ),
-                        IconButton(
+                        if (MediaQuery.of(context).size.width <= 800)...[
+                          IconButton(
                           icon: const Icon(
                             Icons.menu,
                             size: 18,
@@ -128,6 +132,8 @@ class Header extends StatelessWidget {
                           ),
                           onPressed: placeholderCallbackForButtons,
                         ),
+                        ]
+                        
                       ],
                     ),
                   ),
