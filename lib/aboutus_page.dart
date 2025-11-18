@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
+import 'package:union_shop/header.dart';
 class AboutUsPage  extends StatelessWidget {
   const AboutUsPage ({super.key});
   
@@ -22,7 +21,8 @@ The Union Shop & Reception Team​​​​​​​​​.
     return Scaffold(
       body: Center(
         child: Column(
-          children: [ const Text('About Us', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+          children: [ const Header(),
+            const Text('About Us', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
             Text(textDisplay),
           ],
         ),
