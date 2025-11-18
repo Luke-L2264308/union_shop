@@ -18,6 +18,10 @@ class Header extends StatelessWidget {
     // This is the event handler for buttons that don't work yet
   }
 
+  void menuButtonCallback() {
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -130,7 +134,7 @@ class Header extends StatelessWidget {
                             minWidth: 32,
                             minHeight: 32,
                           ),
-                          onPressed: placeholderCallbackForButtons,
+                          onPressed: menuButtonCallback,
                         ),
                         ]
                         
