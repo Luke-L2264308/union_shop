@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/header.dart';
-class AboutUsPage  extends StatelessWidget {
-  const AboutUsPage ({super.key});
-  
+
+class AboutUsPage extends StatelessWidget {
+  const AboutUsPage({super.key});
+
   final String textDisplay = ('''Welcome to the Union Shop!
 
 We’re dedicated to giving you the very best University branded products, with a range of clothing and merchandise available to shop all year round! We even offer an exclusive personalisation service!
@@ -17,16 +18,20 @@ The Union Shop & Reception Team​​​​​​​​​.
 ''');
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
-      body: Center(
+        body: SingleChildScrollView(
+      child: Center(
         child: Column(
-          children: [ const Header(),
-            const Text('About Us', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+          children: [
+            const Header(),
+            const Text(
+              'About Us',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
             Text(textDisplay),
           ],
         ),
       ),
-    );
+    ));
   }
 }
