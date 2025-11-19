@@ -15,11 +15,39 @@ class Header extends StatelessWidget {
   }
 
   void placeholderCallbackForButtons() {
-    // This is the event handler for buttons that don't work yet
+    
   }
 
-  void menuButtonCallback() {
-    
+  void menuButtonCallback() {}
+
+  List<Widget> buildHeaderButtons(BuildContext context) {
+    return [
+      TextButton(
+        onPressed: () =>
+            Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false),
+        child: const Text('Home'),
+      ),
+      TextButton(
+        onPressed: () => Navigator.pushNamed(context, '/product'),
+        child: const Text('Product'),
+      ),
+      TextButton(
+        onPressed: () {}, // placeholder
+        child: const Text('Shop'),
+      ),
+      TextButton(
+        onPressed: () {}, // placeholder
+        child: const Text('The Print Shack'),
+      ),
+      TextButton(
+        onPressed: () {}, // placeholder
+        child: const Text('SALE!'),
+      ),
+      TextButton(
+        onPressed: () => Navigator.pushNamed(context, '/aboutus'),
+        child: const Text('About Us'),
+      ),
+    ];
   }
 
   @override
@@ -68,14 +96,9 @@ class Header extends StatelessWidget {
                       },
                     ),
                   ),
-
                   if (MediaQuery.of(context).size.width > 800) ...[
-                    TextButton(onPressed: () => navigateToHome(context), child: const Text('Home')),
-                    TextButton(onPressed: () => navigateToProduct(context), child: const Text('Product')),
-                    TextButton(onPressed: placeholderCallbackForButtons, child: const Text('Shop')),
-                    TextButton(onPressed: placeholderCallbackForButtons, child: const Text('The Print Shack')),
-                    TextButton(onPressed: placeholderCallbackForButtons, child: const Text('SALE!')),
-                    TextButton(onPressed: () => navigateToAboutUs(context), child: const Text('About Us')),
+                    for (int i = 0; i < buildHeaderButtons(context).length; i++)
+                      buildHeaderButtons(context)[i],
                   ],
                   const Spacer(),
                   ConstrainedBox(
@@ -122,22 +145,21 @@ class Header extends StatelessWidget {
                           ),
                           onPressed: placeholderCallbackForButtons,
                         ),
-                        if (MediaQuery.of(context).size.width <= 800)...[
+                        if (MediaQuery.of(context).size.width <= 800) ...[
                           IconButton(
-                          icon: const Icon(
-                            Icons.menu,
-                            size: 18,
-                            color: Colors.grey,
+                            icon: const Icon(
+                              Icons.menu,
+                              size: 18,
+                              color: Colors.grey,
+                            ),
+                            padding: const EdgeInsets.all(8),
+                            constraints: const BoxConstraints(
+                              minWidth: 32,
+                              minHeight: 32,
+                            ),
+                            onPressed: menuButtonCallback,
                           ),
-                          padding: const EdgeInsets.all(8),
-                          constraints: const BoxConstraints(
-                            minWidth: 32,
-                            minHeight: 32,
-                          ),
-                          onPressed: menuButtonCallback,
-                        ),
                         ]
-                        
                       ],
                     ),
                   ),
