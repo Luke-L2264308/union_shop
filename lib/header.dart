@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+class HeaderItem {
+  final String label;
+  final VoidCallback onPressed;
+  const HeaderItem(this.label, this.onPressed);
+}
+
 class Header extends StatelessWidget {
   const Header({super.key});
   void navigateToHome(BuildContext context) {
@@ -14,41 +20,26 @@ class Header extends StatelessWidget {
     Navigator.pushNamed(context, '/aboutus');
   }
 
-  void placeholderCallbackForButtons() {
-    
-  }
+  void placeholderCallbackForButtons() {}
 
   void menuButtonCallback() {}
 
-  List<Widget> buildHeaderButtons(BuildContext context) {
+  List<HeaderItem> buildHeaderItems(BuildContext context) {
     return [
-      TextButton(
-        onPressed: () =>
-            Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false),
-        child: const Text('Home'),
-      ),
-      TextButton(
-        onPressed: () => Navigator.pushNamed(context, '/product'),
-        child: const Text('Product'),
-      ),
-      TextButton(
-        onPressed: () {}, // placeholder
-        child: const Text('Shop'),
-      ),
-      TextButton(
-        onPressed: () {}, // placeholder
-        child: const Text('The Print Shack'),
-      ),
-      TextButton(
-        onPressed: () {}, // placeholder
-        child: const Text('SALE!'),
-      ),
-      TextButton(
-        onPressed: () => Navigator.pushNamed(context, '/aboutus'),
-        child: const Text('About Us'),
-      ),
+      HeaderItem('Home',
+          () => Navigator.pushNamedAndRemoveUntil(context, '/', (r) => false)),
+      HeaderItem('Shop', () => Navigator.pushNamed(context, '/product')),
+      HeaderItem('The Print Shack', () {}),
+      HeaderItem('SALE!', () {}),
+      HeaderItem('About Us', () => Navigator.pushNamed(context, '/aboutus')),
     ];
   }
+
+  List<Widget> buildHeaderButtons(BuildContext context) => buildHeaderItems(
+          context)
+      .map((it) => TextButton(onPressed: it.onPressed, child: Text(it.label)))
+      .toList();
+
   IconButton buildIconButton(IconData icon, VoidCallback onPressed) {
     return IconButton(
       icon: Icon(
@@ -121,11 +112,25 @@ class Header extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        buildIconButton(Icons.search, placeholderCallbackForButtons),
-                        buildIconButton(Icons.person_outline, placeholderCallbackForButtons),
-                        buildIconButton(Icons.shopping_bag_outlined, placeholderCallbackForButtons),
+                        buildIconButton(
+                            Icons.search, placeholderCallbackForButtons),
+                        buildIconButton(Icons.person_outline,
+                            placeholderCallbackForButtons),
+                        buildIconButton(Icons.shopping_bag_outlined,
+                            placeholderCallbackForButtons),
                         if (MediaQuery.of(context).size.width <= 800) ...[
-                          buildIconButton(Icons.menu, menuButtonCallback),
+                          PopupMenuButton<HeaderItem>(
+                            icon: const Icon(Icons.menu,
+                                size: 18, color: Colors.grey),
+                            itemBuilder: (ctx) {
+                              final items = buildHeaderItems(context);
+                              return items
+                                  .map((it) => PopupMenuItem<HeaderItem>(
+                                      value: it, child: Text(it.label)))
+                                  .toList();
+                            },
+                            onSelected: (item) => item.onPressed(),
+                          )
                         ]
                       ],
                     ),
