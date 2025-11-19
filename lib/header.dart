@@ -49,6 +49,21 @@ class Header extends StatelessWidget {
       ),
     ];
   }
+  IconButton buildIconButton(IconData icon, VoidCallback onPressed) {
+    return IconButton(
+      icon: Icon(
+        icon,
+        size: 18,
+        color: Colors.grey,
+      ),
+      padding: const EdgeInsets.all(8),
+      constraints: const BoxConstraints(
+        minWidth: 32,
+        minHeight: 32,
+      ),
+      onPressed: onPressed,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -106,59 +121,11 @@ class Header extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        IconButton(
-                          icon: const Icon(
-                            Icons.search,
-                            size: 18,
-                            color: Colors.grey,
-                          ),
-                          padding: const EdgeInsets.all(8),
-                          constraints: const BoxConstraints(
-                            minWidth: 32,
-                            minHeight: 32,
-                          ),
-                          onPressed: placeholderCallbackForButtons,
-                        ),
-                        IconButton(
-                          icon: const Icon(
-                            Icons.person_outline,
-                            size: 18,
-                            color: Colors.grey,
-                          ),
-                          padding: const EdgeInsets.all(8),
-                          constraints: const BoxConstraints(
-                            minWidth: 32,
-                            minHeight: 32,
-                          ),
-                          onPressed: placeholderCallbackForButtons,
-                        ),
-                        IconButton(
-                          icon: const Icon(
-                            Icons.shopping_bag_outlined,
-                            size: 18,
-                            color: Colors.grey,
-                          ),
-                          padding: const EdgeInsets.all(8),
-                          constraints: const BoxConstraints(
-                            minWidth: 32,
-                            minHeight: 32,
-                          ),
-                          onPressed: placeholderCallbackForButtons,
-                        ),
+                        buildIconButton(Icons.search, placeholderCallbackForButtons),
+                        buildIconButton(Icons.person_outline, placeholderCallbackForButtons),
+                        buildIconButton(Icons.shopping_bag_outlined, placeholderCallbackForButtons),
                         if (MediaQuery.of(context).size.width <= 800) ...[
-                          IconButton(
-                            icon: const Icon(
-                              Icons.menu,
-                              size: 18,
-                              color: Colors.grey,
-                            ),
-                            padding: const EdgeInsets.all(8),
-                            constraints: const BoxConstraints(
-                              minWidth: 32,
-                              minHeight: 32,
-                            ),
-                            onPressed: menuButtonCallback,
-                          ),
+                          buildIconButton(Icons.menu, menuButtonCallback),
                         ]
                       ],
                     ),
