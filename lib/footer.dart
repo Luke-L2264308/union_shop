@@ -1,28 +1,68 @@
 import 'package:flutter/material.dart';
 
-Widget footerItem(BuildContext context, Widget childContents) {
+Widget footerItem(double size, BuildContext context, Widget childContents) {
   final double screenWidth = MediaQuery.of(context).size.width;
   final bool wide = screenWidth >= 800;
   return SizedBox(
       width: wide
-          ? 250
+          ? size
           : double.infinity, // fixed card width on wide, full width on narrow
       child: childContents);
 }
-String openingTimes(){
-  return """Opening Hours
 
-❄️ Winter Break Closure Dates ❄️
-Closing 4pm 19/12/2025
-Reopening 10am 05/01/2026
-Last post date: 12pm on 18/12/2025
-------------------------
-(Term Time)
-Monday - Friday 10am - 4pm
-(Outside of Term Time / Consolidation Weeks)
-Monday - Friday 10am - 3pm
-Purchase online 24/7""";
+Widget openingTimes() {
+  return const Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        'Opening Hours',
+        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      ),
+      SizedBox(height: 8),
+      Text(
+        '❄️ Winter Break Closure Dates ❄️\n'
+        'Closing 4pm 19/12/2025\n'
+        'Reopening 10am 05/01/2026\n'
+        'Last post date: 12pm on 18/12/2025\n'
+        '------------------------\n'
+        '(Term Time)\n'
+        'Monday - Friday 10am - 4pm\n'
+        '(Outside of Term Time / Consolidation Weeks)\n'
+        'Monday - Friday 10am - 3pm\n'
+        'Purchase online 24/7',
+      ),
+    ],
+  );
 }
+
+void searchButtonClick() {
+  // Placeholder for search button functionality
+}
+
+Widget helpAndInformationContents() {
+  return const Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+    Text(
+      'Help & Information',
+      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+    ),
+    TextButton(onPressed: searchButtonClick, child: Text('Search')),
+  ]);
+}
+
+Widget latestOffersContents() {
+  return const Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        'Latest Offers',
+        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      ),
+      SizedBox(height: 8),
+      Text('Check back soon for our latest offers!'),
+    ],
+  );
+}
+
 class Footer extends StatelessWidget {
   const Footer({super.key});
   @override
@@ -30,9 +70,10 @@ class Footer extends StatelessWidget {
     return Container(
         padding: const EdgeInsets.all(16),
         color: Colors.grey[200],
-        child: Wrap(
-            spacing: 12,
-            runSpacing: 12,
-            children: [footerItem(context, Text(openingTimes()))]));
+        child: Wrap(spacing: 12, runSpacing: 12, children: [
+          footerItem(250, context, openingTimes()),
+          footerItem(250, context, helpAndInformationContents()),
+          footerItem(double.infinity, context, latestOffersContents())
+        ]));
   }
 }
