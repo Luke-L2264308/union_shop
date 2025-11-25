@@ -53,12 +53,24 @@ Widget latestOffersContents() {
   return const Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(
+      Text( 
         'Latest Offers',
         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
       ),
-      SizedBox(height: 8),
-      Text('Check back soon for our latest offers!'),
+      Row(
+        children: [
+          Expanded(
+            child: TextField(
+              decoration: InputDecoration(
+                labelText: 'Enter your email',
+              ),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+          SizedBox(width: 8),
+          FilledButton(onPressed: searchButtonClick, child: Text('Subscribe')),
+        ],
+      ),
     ],
   );
 }
@@ -68,12 +80,22 @@ class Footer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.symmetric(
+          horizontal: (() {
+            final double screenWidth = MediaQuery.of(context).size.width;
+            const double minPad = 16.0;
+            // total fixed widths of the footer items plus Wrap spacing (adjust if you change items)
+            const double contentWidth = 250 + 250 + 400 + 12 * 2;
+            final double sideSpace = (screenWidth - contentWidth) / 2;
+            return sideSpace > minPad ? sideSpace : minPad;
+          })(),
+          vertical: 16,
+        ),
         color: Colors.grey[200],
         child: Wrap(spacing: 12, runSpacing: 12, children: [
           footerItem(250, context, openingTimes()),
           footerItem(250, context, helpAndInformationContents()),
-          footerItem(double.infinity, context, latestOffersContents())
+          footerItem(400, context, latestOffersContents())
         ]));
   }
 }
