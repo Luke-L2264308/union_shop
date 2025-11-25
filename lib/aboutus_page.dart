@@ -20,19 +20,28 @@ The Union Shop & Reception Team​​​​​​​​​.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-      child: Center(
-        child: Column(
-          children: [
-            const Header(),
-            const Text(
-              'About Us',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      body: Column(
+        children: [
+          const Header(),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              child: Center(
+                child: Column(
+                  children: [
+                    const Text(
+                      'About Us',
+                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
+                    Text(textDisplay),
+                  ],
+                ),
+              ),
             ),
-            Text(textDisplay), const Footer()
-          ],
-        ),
+          ),
+          const Footer(), // stays at bottom of screen when content is short
+        ],
       ),
-    ));
+    );
   }
 }
