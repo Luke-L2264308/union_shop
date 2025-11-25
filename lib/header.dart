@@ -102,6 +102,7 @@ class Header extends StatelessWidget {
                       },
                     ),
                   ),
+                  
                   if (MediaQuery.of(context).size.width > 800) ...[
                     for (int i = 0; i < buildHeaderButtons(context).length; i++)
                       buildHeaderButtons(context)[i],

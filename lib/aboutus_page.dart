@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/footer.dart';
 import 'package:union_shop/header.dart';
 
 class AboutUsPage extends StatelessWidget {
@@ -28,7 +29,7 @@ The Union Shop & Reception Team​​​​​​​​​.
               'About Us',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            Text(textDisplay),
+            Text(textDisplay), const Footer()
           ],
         ),
       ),
