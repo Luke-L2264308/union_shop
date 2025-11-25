@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 Widget footerItem(double size, BuildContext context, Widget childContents) {
   final double screenWidth = MediaQuery.of(context).size.width;
-  final bool wide = screenWidth >= 800;
+  final bool wide = screenWidth >= 956;
   return SizedBox(
       width: wide
           ? size

@@ -11,9 +11,12 @@ We’re dedicated to giving you the very best University branded products, with 
 
 All online purchases are available for delivery or instore collection!
 
+
 We hope you enjoy our products as much as we enjoy offering them to you. If you have any questions or comments, please don’t hesitate to contact us at hello@upsu.net.
 
+
 Happy shopping!
+
 
 The Union Shop & Reception Team​​​​​​​​​.
 ''');
@@ -31,17 +34,22 @@ The Union Shop & Reception Team​​​​​​​​​.
                   children: [
                     const Text(
                       'About Us',
-                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),
                     Text(textDisplay),
+                    if (MediaQuery.of(context).size.width < 800) ...[
+                      const Footer(),
+                    ],
                   ],
                 ),
               ),
             ),
-          ),
-          const Footer(), // stays at bottom of screen when content is short
-        ],
-      ),
+            
+          )
+        , if (MediaQuery.of(context).size.width >= 800) ...[
+                      const Footer(),],
+      ],),
     );
   }
 }
