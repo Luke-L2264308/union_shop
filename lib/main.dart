@@ -3,6 +3,7 @@ import 'package:union_shop/footer.dart';
 import 'package:union_shop/header.dart';
 import 'package:union_shop/product_page.dart';
 import 'package:union_shop/aboutus_page.dart';
+
 void main() {
   runApp(const UnionShopApp());
 }
@@ -23,9 +24,9 @@ class UnionShopApp extends StatelessWidget {
       initialRoute: '/',
       // When navigating to '/product', build and return the ProductPage
       // In your browser, try this link: http://localhost:49856/#/product
-      routes: {'/product': (context) => const ProductPage(),
-               '/aboutus': (context) => const AboutUsPage(),
-        
+      routes: {
+        '/product': (context) => const ProductPage(),
+        '/aboutus': (context) => const AboutUsPage(),
       },
     );
   }
@@ -156,24 +157,27 @@ class HomeScreen extends StatelessWidget {
                           price: '£10.00',
                           imageUrl:
                               'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                          routeName: '/product',
                         ),
                         ProductCard(
-                          title: 'Placeholder Product 2',
-                          price: '£15.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
+                            title: 'Placeholder Product 2',
+                            price: '£15.00',
+                            imageUrl:
+                                'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                            routeName: '/product'),
                         ProductCard(
                           title: 'Placeholder Product 3',
                           price: '£20.00',
                           imageUrl:
                               'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                          routeName: '/product',
                         ),
                         ProductCard(
                           title: 'Placeholder Product 4',
                           price: '£25.00',
                           imageUrl:
                               'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                          routeName: '/product',
                         ),
                       ],
                     ),
@@ -191,16 +195,17 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class ProductCard extends StatelessWidget {
+class Card extends StatelessWidget {
   final String title;
-  final String price;
+  // final String price;
   final String imageUrl;
-
-  const ProductCard({
+  final String routeName;
+  const Card({
     super.key,
     required this.title,
-    required this.price,
+    // required this.price,
     required this.imageUrl,
+    required this.routeName,
   });
 
   @override
@@ -226,24 +231,64 @@ class ProductCard extends StatelessWidget {
               },
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 4),
-              Text(
-                title,
-                style: const TextStyle(fontSize: 14, color: Colors.black),
-                maxLines: 2,
-              ),
-              const SizedBox(height: 4),
-              Text(
-                price,
-                style: const TextStyle(fontSize: 13, color: Colors.grey),
-              ),
-            ],
-          ),
+          // Column(
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: [
+          //     const SizedBox(height: 4),
+          //     Text(
+          //       title,
+          //       style: const TextStyle(fontSize: 14, color: Colors.black),
+          //       maxLines: 2,
+          //     ),
+          //     const SizedBox(height: 4),
+          //     Text(
+          //       price,
+          //       style: const TextStyle(fontSize: 13, color: Colors.grey),
+          //     ),
+          //   ],
+          // ),
         ],
       ),
     );
   }
+}
+
+class ProductCard extends Card {
+  final String price;
+  const ProductCard({
+    super.key,
+    required super.title,
+    required this.price,
+    required super.imageUrl,
+    required super.routeName,
+  });
+  @override
+  Widget build(BuildContext context) {
+    
+      
+      final Widget inheritedImage = Expanded(
+        child:super.build(context),
+      );
+
+      return GestureDetector(
+        onTap: () => Navigator.pushNamed(context, routeName),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            inheritedImage,
+            const SizedBox(height: 4),
+            Text(
+              title,
+              style: const TextStyle(fontSize: 14, color: Colors.black),
+              maxLines: 2,
+            ),
+            const SizedBox(height: 4),
+            Text(
+              price,
+              style: const TextStyle(fontSize: 13, color: Colors.grey),
+            ),
+          ],
+        ),
+      );
+    }
 }
