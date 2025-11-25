@@ -179,6 +179,13 @@ class HomeScreen extends StatelessWidget {
                               'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
                           routeName: '/product',
                         ),
+                        CollectionCard(
+                          title: 'Placeholder Collection 1',
+                          description: 'This is a placeholder description for Collection 1.',
+                          imageUrl:
+                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                          routeName: '/collection',
+                        ),
                       ],
                     ),
                   ],
@@ -197,13 +204,11 @@ class HomeScreen extends StatelessWidget {
 
 class Card extends StatelessWidget {
   final String title;
-  // final String price;
   final String imageUrl;
   final String routeName;
   const Card({
     super.key,
     required this.title,
-    // required this.price,
     required this.imageUrl,
     required this.routeName,
   });
@@ -231,22 +236,6 @@ class Card extends StatelessWidget {
               },
             ),
           ),
-          // Column(
-          //   crossAxisAlignment: CrossAxisAlignment.start,
-          //   children: [
-          //     const SizedBox(height: 4),
-          //     Text(
-          //       title,
-          //       style: const TextStyle(fontSize: 14, color: Colors.black),
-          //       maxLines: 2,
-          //     ),
-          //     const SizedBox(height: 4),
-          //     Text(
-          //       price,
-          //       style: const TextStyle(fontSize: 13, color: Colors.grey),
-          //     ),
-          //   ],
-          // ),
         ],
       ),
     );
@@ -264,31 +253,82 @@ class ProductCard extends Card {
   });
   @override
   Widget build(BuildContext context) {
-    
-      
-      final Widget inheritedImage = Expanded(
-        child:super.build(context),
-      );
+    final Widget inheritedImage = Expanded(
+      child: super.build(context),
+    );
 
-      return GestureDetector(
-        onTap: () => Navigator.pushNamed(context, routeName),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            inheritedImage,
-            const SizedBox(height: 4),
-            Text(
+    return GestureDetector(
+      onTap: () => Navigator.pushNamed(context, routeName),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          inheritedImage,
+          const SizedBox(height: 4),
+          Text(
+            title,
+            style: const TextStyle(fontSize: 14, color: Colors.black),
+            maxLines: 2,
+          ),
+          const SizedBox(height: 4),
+          Text(
+            price,
+            style: const TextStyle(fontSize: 13, color: Colors.grey),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CollectionCard extends Card {
+  final String description;
+  const CollectionCard({
+    super.key,
+    required super.title,
+    required this.description,
+    required super.imageUrl,
+    required super.routeName,
+  });
+  @override
+  Widget build(BuildContext context) {
+    final Widget inheritedImage = Expanded(
+      child: super.build(context),
+    
+    );
+    return GestureDetector(
+      onTap: () => Navigator.pushNamed(context, routeName),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          inheritedImage,
+          // translucent label overlapping the image
+          Container(
+            margin: const EdgeInsets.only(top: -56),
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.black.withAlpha((0.6 * 255).round()),
+            ),
+            child: Text(
               title,
-              style: const TextStyle(fontSize: 14, color: Colors.black),
-              maxLines: 2,
+              style: const TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
-            const SizedBox(height: 4),
-            Text(
-              price,
-              style: const TextStyle(fontSize: 13, color: Colors.grey),
-            ),
-          ],
-        ),
-      );
-    }
+          ),
+          const SizedBox(height: 8),
+          Text(
+            description,
+            style: const TextStyle(fontSize: 13, color: Colors.grey),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+            ],
+          ),
+        );
+  }
 }
