@@ -289,46 +289,47 @@ class CollectionCard extends Card {
     required super.imageUrl,
     required super.routeName,
   });
+
   @override
   Widget build(BuildContext context) {
-    final Widget inheritedImage = Expanded(
-      child: super.build(context),
-    
-    );
     return GestureDetector(
       onTap: () => Navigator.pushNamed(context, routeName),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          inheritedImage,
-          // translucent label overlapping the image
-          Container(
-            margin: const EdgeInsets.only(top: -56),
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.black.withAlpha((0.6 * 255).round()),
+          // Image with translucent textbox overlapping the bottom
+          Expanded(
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: super.build(context),
+                ),
+                Expanded(
+                  
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                    
+                    color: Colors.black.withAlpha(153),
+                    child: Center(
+                      child: Text(
+                        title,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            child: Text(
-              title,
-              style: const TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-              ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
           ),
-          const SizedBox(height: 8),
-          Text(
-            description,
-            style: const TextStyle(fontSize: 13, color: Colors.grey),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
-            ],
-          ),
-        );
+          
+        ],
+      ),
+    );
   }
 }
