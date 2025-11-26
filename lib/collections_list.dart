@@ -25,6 +25,32 @@ List<Widget> buildCollectionCards(List<Map<String, dynamic>> collections) {
   }).toList();
 }
 
+//this function should be able to be used to build both the collections "e.g. like good friday sales" and also the categories within products "e.g. hoodies, t-shirts etc"
+FutureBuilder<List<Map<String, dynamic>>> buildCollectionsFutureBuilder(Future<List<Map<String, dynamic>>> future, BuildContext context, List<Widget> Function(List<Map<String, dynamic>>) buildCollectionCards) {
+  return FutureBuilder<List<Map<String, dynamic>>>(
+    future: future,
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const Center(child: CircularProgressIndicator());
+      }
+      if (snapshot.hasError) {
+        return Center(child: Text('Error: ${snapshot.error}'));
+      }
+      final collections = snapshot.data ?? [];
+      return GridView.count(
+        shrinkWrap: true, // allow GridView inside a scrollable parent
+        physics: const NeverScrollableScrollPhysics(), // let outer scroll view handle scrolling
+        crossAxisCount: MediaQuery.of(context).size.width > 600 ? 2 : 1,
+        crossAxisSpacing: 24,
+        mainAxisSpacing: 48,
+        children: [
+          ...buildCollectionCards(collections),
+        ],
+      );
+    },
+  );
+}
+
 class Collections extends StatelessWidget {
   const Collections({super.key});
   @override
@@ -43,34 +69,8 @@ class Collections extends StatelessWidget {
                     Column(
                       children: [
                         const Header(),
-                        FutureBuilder<List<Map<String, dynamic>>>(
-                          future: loadCollections(),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState == ConnectionState.waiting) {
-                              return const Padding(
-                                padding: EdgeInsets.all(24.0),
-                                child: Center(child: CircularProgressIndicator()),
-                              );
-                            }
-                            if (snapshot.hasError) {
-                              return Padding(
-                                padding: const EdgeInsets.all(24.0),
-                                child: Center(child: Text('Error: ${snapshot.error}')),
-                              );
-                            }
-                            final collections = snapshot.data ?? [];
-                            return GridView.count(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              crossAxisCount: MediaQuery.of(context).size.width > 600 ? 2 : 1,
-                              crossAxisSpacing: 24,
-                              mainAxisSpacing: 48,
-                              children: [
-                                ...buildCollectionCards(collections),
-                              ],
-                            );
-                          },
-                        ),
+                        buildCollectionsFutureBuilder(loadCollections(), context, buildCollectionCards)
+                        
                       ],
                     ),
 
