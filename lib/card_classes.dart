@@ -103,7 +103,6 @@ class CollectionCard extends Card {
                   child: super.build(context),
                 ),
                 Expanded(
-                  
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
                     

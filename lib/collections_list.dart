@@ -117,3 +117,98 @@ class Collections extends StatelessWidget {
     );
   }
 }
+
+class AutumnFavouritesPage extends StatelessWidget {
+  const AutumnFavouritesPage({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: PageMaster(
+        child: buildCollectionsFutureBuilder(
+          loadCollections('Autumn Favourites'),
+          context,
+          buildProductCards,
+        ),
+      ),
+    );
+  }
+}
+
+class BlackFridayPage extends StatelessWidget {
+  const BlackFridayPage({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: PageMaster(
+        child: buildCollectionsFutureBuilder(
+          loadCollections('Black Friday'),
+          context,
+          buildProductCards,
+        ),
+      ),
+    );
+  }
+}
+class ClothingPage extends StatelessWidget {
+  const ClothingPage({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: PageMaster(
+        child: buildCollectionsFutureBuilder(
+          loadCollections('Clothing'),
+          context,
+          buildProductCards,
+        ),
+      ),
+    );
+  }
+}
+
+class GraduationPage extends StatelessWidget {
+  const GraduationPage({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: PageMaster(
+        child: buildCollectionsFutureBuilder(
+          loadCollections('Graduation'),
+          context,
+          buildProductCards,
+        ),
+      ),
+    );
+  }
+}
+
+class MerchandisePage extends StatelessWidget {
+  const MerchandisePage({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: PageMaster(
+        child: buildCollectionsFutureBuilder(
+          loadCollections('Merchandise'),
+          context,
+          buildProductCards,
+        ),
+      ),
+    );
+  }
+}
+
+class PersonalisationPage extends StatelessWidget {
+  const PersonalisationPage({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: PageMaster(
+        child: buildCollectionsFutureBuilder(
+          loadCollections('Personalisation'),
+          context,
+          buildProductCards,
+        ),
+      ),
+    );
+  }
+}
