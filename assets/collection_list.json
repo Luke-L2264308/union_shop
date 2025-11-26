@@ -1,0 +1,10 @@
+{
+"categories":[
+    { "title": "Autumn Favourites", "imageLocation": "autumn-favourites.png"},
+    { "title": "Black Friday", "imageLocation": "black-friday.png" },
+    { "title": "Clothing", "imageLocation": "clothing.png" },
+    { "title": "Graduation", "imageLocation": "graduation.png" },
+    { "title": "Merchandise", "imageLocation": "merchandise.png" },
+    { "title": "Personalisation", "imageLocation": "personalisation.png" }
+]
+}
