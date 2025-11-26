@@ -1,10 +1,10 @@
 {
 "categories":[
-    { "title": "Autumn Favourites", "imageLocation": "autumn-favourites.png"},
-    { "title": "Black Friday", "imageLocation": "black-friday.png" },
-    { "title": "Clothing", "imageLocation": "clothing.png" },
-    { "title": "Graduation", "imageLocation": "graduation.png" },
-    { "title": "Merchandise", "imageLocation": "merchandise.png" },
-    { "title": "Personalisation", "imageLocation": "personalisation.png" }
+    { "title": "Autumn Favourites", "imageLocation": "autumn-favourites.png", "routeName": "/autumn-favourites"},
+    { "title": "Black Friday", "imageLocation": "black-friday.png", "routeName": "/black-friday"},
+    { "title": "Clothing", "imageLocation": "clothing.png", "routeName": "/clothing"},
+    { "title": "Graduation", "imageLocation": "graduation.png", "routeName": "/graduation"},
+    { "title": "Merchandise", "imageLocation": "merchandise.png", "routeName": "/merchandise"},
+    { "title": "Personalisation", "imageLocation": "personalisation.png", "routeName": "/personalisation"}
 ]
 }
