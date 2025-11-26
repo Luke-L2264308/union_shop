@@ -2,224 +2,224 @@
     "categories": [
         {
             "title": "Autumn Favourites",
-            "imageLocation": "assets/images/autumn-favourites.png",
-            "routeName": "collections/autumn-favourites"
+            "imageLocation": "assets/images/collections/autumn-favourites.png",
+            "routeName": "/collection/autumn-favourites"
         },
         {
             "title": "Black Friday",
-            "imageLocation": "assets/images/black-friday.png",
-            "routeName": "collections/black-friday"
+            "imageLocation": "assets/images/collections/black-friday.png",
+            "routeName": "/collection/black-friday"
         },
         {
             "title": "Clothing",
-            "imageLocation": "assets/images/clothing.png",
-            "routeName": "collections/clothing"
+            "imageLocation": "assets/images/collections/clothing.png",
+            "routeName": "/collection/clothing"
         },
         {
             "title": "Graduation",
-            "imageLocation": "assets/images/graduation.png",
-            "routeName": "collections/graduation"
+            "imageLocation": "assets/images/collections/graduation.png",
+            "routeName": "/collection/graduation"
         },
         {
             "title": "Merchandise",
-            "imageLocation": "assets/images/merchandise.png",
-            "routeName": "collections/merchandise"
+            "imageLocation": "assets/images/collections/merchandise.png",
+            "routeName": "/collection/merchandise"
         },
         {
             "title": "Personalisation",
-            "imageLocation": "assets/images/personalisation.png",
-            "routeName": "collections/personalisation"
+            "imageLocation": "assets/images/collections/personalisation.png",
+            "routeName": "/collection/personalisation"
         }
     ],
     "Autumn Favourites": [
         {
             "title": "Autumn Knit Scarf",
-            "price": "29.99",
-            "imageLocation": "assets/images/autumn-knit-scarf.png",
+            "price": "£29.99",
+            "imageLocation": "assets/images/autumn-favourites/autumn-knit-scarf.png",
             "routeName": "/autumn-favourites/autumn-knit-scarf"
         },
         {
             "title": "Leaf Print Sweater",
-            "price": "49.50",
-            "imageLocation": "assets/images/leaf-print-sweater.png",
+            "price": "£49.50",
+            "imageLocation": "assets/images/autumn-favourites/leaf-print-sweater.png",
             "routeName": "/autumn-favourites/leaf-print-sweater"
         },
         {
             "title": "Corduroy Jacket",
-            "price": "79.00",
-            "imageLocation": "assets/images/corduroy-jacket.png",
+            "price": "£79.00",
+            "imageLocation": "assets/images/autumn-favourites/corduroy-jacket.png",
             "routeName": "/autumn-favourites/corduroy-jacket"
         },
         {
             "title": "Amber Scent Candle",
-            "price": "15.00",
-            "imageLocation": "assets/images/amber-scent-candle.png",
+            "price": "£15.00",
+            "imageLocation": "assets/images/autumn-favourites/amber-scent-candle.png",
             "routeName": "/autumn-favourites/amber-scent-candle"
         },
         {
             "title": "Wool Beanie",
-            "price": "12.99",
-            "imageLocation": "assets/images/wool-beanie.png",
+            "price": "£12.99",
+            "imageLocation": "assets/images/autumn-favourites/wool-beanie.png",
             "routeName": "/autumn-favourites/wool-beanie"
         }
     ],
     "Black Friday": [
         {
             "title": "Noise-Cancelling Headphones",
-            "price": "199.99",
-            "imageLocation": "assets/images/blackfriday-headphones.png",
+            "price": "£199.99",
+            "imageLocation": "assets/images/black-friday/noise-cancelling-headphones.png",
             "routeName": "/black-friday/noise-cancelling-headphones"
         },
         {
             "title": "4K Smart TV 55\"",
-            "price": "399.00",
-            "imageLocation": "assets/images/blackfriday-4k-tv.png",
+            "price": "£399.00",
+            "imageLocation": "assets/images/black-friday/4k-smart-tv-55.png",
             "routeName": "/black-friday/4k-smart-tv-55"
         },
         {
             "title": "Gaming Mouse",
-            "price": "39.99",
-            "imageLocation": "assets/images/blackfriday-gaming-mouse.png",
+            "price": "£39.99",
+            "imageLocation": "assets/images/black-friday/gaming-mouse.png",
             "routeName": "/black-friday/gaming-mouse"
         },
         {
             "title": "Leather Wallet",
-            "price": "24.99",
-            "imageLocation": "assets/images/blackfriday-leather-wallet.png",
+            "price": "£24.99",
+            "imageLocation": "assets/images/black-friday/leather-wallet.png",
             "routeName": "/black-friday/leather-wallet"
         },
         {
             "title": "Portable Charger 10000mAh",
-            "price": "19.50",
-            "imageLocation": "assets/images/blackfriday-powerbank.png",
+            "price": "£19.50",
+            "imageLocation": "assets/images/black-friday/portable-charger-10000mah.png",
             "routeName": "/black-friday/portable-charger-10000mah"
         }
     ],
     "Clothing": [
         {
             "title": "Classic Logo T-Shirt",
-            "price": "18.00",
-            "imageLocation": "assets/images/clothing-tee.png",
+            "price": "£18.00",
+            "imageLocation": "assets/images/clothing/clothing-tee.png",
             "routeName": "/clothing/classic-logo-tshirt"
         },
         {
             "title": "Denim Jeans",
-            "price": "59.99",
-            "imageLocation": "assets/images/clothing-jeans.png",
+            "price": "£59.99",
+            "imageLocation": "assets/images/clothing/clothing-jeans.png",
             "routeName": "/clothing/denim-jeans"
         },
         {
             "title": "Zip Hoodie",
-            "price": "45.00",
-            "imageLocation": "assets/images/clothing-hoodie.png",
+            "price": "£45.00",
+            "imageLocation": "assets/images/clothing/clothing-hoodie.png",
             "routeName": "/clothing/zip-hoodie"
         },
         {
             "title": "Summer Dress",
-            "price": "34.50",
-            "imageLocation": "assets/images/clothing-dress.png",
+            "price": "£34.50",
+            "imageLocation": "assets/images/clothing/clothing-dress.png",
             "routeName": "/clothing/summer-dress"
         },
         {
             "title": "Athletic Shorts",
-            "price": "22.00",
-            "imageLocation": "assets/images/clothing-shorts.png",
+            "price": "£22.00",
+            "imageLocation": "assets/images/clothing/clothing-shorts.png",
             "routeName": "/clothing/athletic-shorts"
         }
     ],
     "Graduation": [
         {
             "title": "Graduation Gown",
-            "price": "89.99",
-            "imageLocation": "assets/images/graduation-gown.png",
+            "price": "£89.99",
+            "imageLocation": "assets/images/graduation/graduation-gown.png",
             "routeName": "/graduation/graduation-gown"
         },
         {
             "title": "Cap & Tassel Set",
-            "price": "24.99",
-            "imageLocation": "assets/images/graduation-cap-tassel.png",
+            "price": "£24.99",
+            "imageLocation": "assets/images/graduation/cap-tassel-set.png",
             "routeName": "/graduation/cap-tassel-set"
         },
         {
             "title": "Class Ring",
-            "price": "129.00",
-            "imageLocation": "assets/images/graduation-class-ring.png",
+            "price": "£129.00",
+            "imageLocation": "assets/images/graduation/class-ring.png",
             "routeName": "/graduation/class-ring"
         },
         {
             "title": "Memory Photo Book",
-            "price": "39.50",
-            "imageLocation": "assets/images/graduation-photo-book.png",
+            "price": "£39.50",
+            "imageLocation": "assets/images/graduation/memory-photo-book.png",
             "routeName": "/graduation/memory-photo-book"
         },
         {
             "title": "Personalised Diploma Frame",
-            "price": "49.99",
-            "imageLocation": "assets/images/graduation-diploma-frame.png",
+            "price": "£49.99",
+            "imageLocation": "assets/images/graduation/personalised-diploma-frame.png",
             "routeName": "/graduation/personalised-diploma-frame"
         }
     ],
     "Merchandise": [
         {
             "title": "Logo Mug",
-            "price": "9.99",
-            "imageLocation": "assets/images/merchandise-mug.png",
+            "price": "£9.99",
+            "imageLocation": "assets/images/merchandise/logo-mug.png",
             "routeName": "/merchandise/logo-mug"
         },
         {
             "title": "Sticker Pack (10)",
-            "price": "4.50",
-            "imageLocation": "assets/images/merchandise-stickers.png",
+            "price": "£4.50",
+            "imageLocation": "assets/images/merchandise/sticker-pack.png",
             "routeName": "/merchandise/sticker-pack"
         },
         {
             "title": "Enamel Pin",
-            "price": "6.99",
-            "imageLocation": "assets/images/merchandise-pin.png",
+            "price": "£6.99",
+            "imageLocation": "assets/images/merchandise/enamel-pin.png",
             "routeName": "/merchandise/enamel-pin"
         },
         {
             "title": "Branded Tote Bag",
-            "price": "14.00",
-            "imageLocation": "assets/images/merchandise-tote.png",
+            "price": "£14.00",
+            "imageLocation": "assets/images/merchandise/branded-tote-bag.png",
             "routeName": "/merchandise/branded-tote-bag"
         },
         {
             "title": "Insulated Water Bottle",
-            "price": "19.99",
-            "imageLocation": "assets/images/merchandise-bottle.png",
+            "price": "£19.99",
+            "imageLocation": "assets/images/merchandise/insulated-water-bottle.png",
             "routeName": "/merchandise/insulated-water-bottle"
         }
     ],
     "Personalisation": [
         {
             "title": "Custom Name Hoodie",
-            "price": "39.99",
-            "imageLocation": "assets/images/personalisation-hoodie.png",
+            "price": "£39.99",
+            "imageLocation": "assets/images/personalisation/custom-name-hoodie.png",
             "routeName": "/personalisation/custom-name-hoodie"
         },
         {
             "title": "Monogrammed Wallet",
-            "price": "34.00",
-            "imageLocation": "assets/images/personalisation-wallet.png",
+            "price": "£34.00",
+            "imageLocation": "assets/images/personalisation/monogrammed-wallet.png",
             "routeName": "/personalisation/monogrammed-wallet"
         },
         {
             "title": "Personalised Necklace",
-            "price": "49.50",
-            "imageLocation": "assets/images/personalisation-necklace.png",
+            "price": "£49.50",
+            "imageLocation": "assets/images/personalisation/personalised-necklace.png",
             "routeName": "/personalisation/personalised-necklace"
         },
         {
             "title": "Engraved Pen",
-            "price": "12.99",
-            "imageLocation": "assets/images/personalisation-pen.png",
+            "price": "£12.99",
+            "imageLocation": "assets/images/personalisation/engraved-pen.png",
             "routeName": "/personalisation/engraved-pen"
         },
         {
             "title": "Custom Phone Case",
-            "price": "19.99",
-            "imageLocation": "assets/images/personalisation-phone-case.png",
+            "price": "£19.99",
+            "imageLocation": "assets/images/personalisation/custom-phone-case.png",
             "routeName": "/personalisation/custom-phone-case"
         }
     ]

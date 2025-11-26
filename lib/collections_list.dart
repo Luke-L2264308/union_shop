@@ -18,7 +18,7 @@ List<Widget> buildCollectionCards(List<Map<String, dynamic>> collections) {
       description:
           'This is a placeholder description for ${collection['title']}.',
       imageUrl: '${collection['imageLocation']}',
-      routeName: collection['routeName'],
+      routeName: '${collection['routeName']}',
     );
   }).toList();
 }
@@ -29,7 +29,7 @@ List<Widget> buildProductCards(List<Map<String, dynamic>> collections) {
       title: collection['title'],
       price: collection['price'],
       imageUrl: '${collection['imageLocation']}',
-      routeName: collection['routeName'],
+      routeName: '${collection['routeName']}',
     );
   }).toList();
 }
