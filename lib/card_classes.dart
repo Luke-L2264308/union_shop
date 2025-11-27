@@ -92,39 +92,32 @@ class CollectionCard extends Card {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => Navigator.pushNamed(context, routeName),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Stack(
+        fit: StackFit.expand,
         children: [
-          // Image with translucent textbox overlapping the bottom
-          Expanded(
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: super.build(context),
+          // Using super.build(context) to render the image
+          super.build(context),
+
+          // The translucent grey overlay
+          Container(
+            color: Colors.black.withOpacity(0.4),
+          ),
+
+          // The text in the center
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                title,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
                 ),
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-                    
-                    color: Colors.black.withAlpha(153),
-                    child: Center(
-                      child: Text(
-                        title,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
-          
         ],
       ),
     );
