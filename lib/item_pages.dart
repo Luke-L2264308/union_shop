@@ -3,12 +3,38 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/collections_list.dart' show loadCollections;
 import 'package:union_shop/product_page.dart';
 
-
 class AutumnKnitScarfPage extends StatelessWidget {
-  const AutumnKnitScarfPage({super.key});
+  const AutumnKnitScarfPage({super.key, required this.routeName});
+  final String routeName;
+  List<String> get routeNames => routeName.split('/');
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(future: loadCollections('Autumn Favourites'), builder:  (context, snapshot) {
+    // normalize route parts (remove empty segments caused by leading '/')
+    final parts = routeName.split('/').where((s) => s.isNotEmpty).toList();
+    if (parts.length < 3) {
+      return const Scaffold(body: Center(child: Text('Invalid route')));
+    }
+
+    // expected: ['/','collection-slug','item-slug'] -> use parts[1] and parts[2]
+    final collectionSlug = parts.length > 1 ? parts[1] : '';
+    final itemSlug = parts.length > 2 ? parts[2] : '';
+
+    String _pretty(String slug) {
+      final pieces = slug.split('-');
+      return pieces
+          .where((p) => p.isNotEmpty)
+          .map((p) => p.length > 0
+              ? '${p[0].toUpperCase()}${p.substring(1).toLowerCase()}'
+              : p)
+          .join(' ');
+    }
+
+    final collectionName = _pretty(collectionSlug);
+    final itemName = _pretty(itemSlug);
+
+    return FutureBuilder<List<dynamic>>(
+      future: loadCollections(collectionName),
+      builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Scaffold(
             body: Center(child: CircularProgressIndicator()),
@@ -19,34 +45,34 @@ class AutumnKnitScarfPage extends StatelessWidget {
             body: Center(child: Text('Error: ${snapshot.error}')),
           );
         }
-        final items = snapshot.data ?? [];
-        // make itemsList mutable so we can replace it with the found item
-        List<Map<String, dynamic>> itemsList = (items as List<dynamic>?)
-          ?.map((e) => Map<String, dynamic>.from(e as Map<String, dynamic>))
-          .toList() ?? <Map<String, dynamic>>[];
+        final raw = snapshot.data ?? <dynamic>[];
+        // convert to typed list of maps
+        final List<Map<String, dynamic>> itemsList = raw
+            .whereType<Map<String, dynamic>>()
+            .map((m) => Map<String, dynamic>.from(m))
+            .toList();
 
-        const query = 'autumn knit scarf';
+        final query = itemName.toLowerCase().trim();
         Map<String, dynamic>? foundItem;
+
         for (final item in itemsList) {
-          final text = '${item['name'] ?? item['title']  ?? ''}'.toLowerCase();
-          if (text.contains(query)) {
+          final titleText = ((item['title'] ?? item['name']) as Object)
+              .toString()
+              .toLowerCase();
+          if (titleText == query || titleText.contains(query)) {
             foundItem = item;
             break;
           }
         }
 
-        // if the item wasn't found, show not found
         if (foundItem == null) {
           return const Scaffold(
             body: Center(child: Text('Item not found')),
           );
         }
 
-        // replace itemsList with a single-entry list containing the found item
-        itemsList = [foundItem];
-        return ProductPage(data: itemsList);
-      },)
-      
-    ;  
+        return ProductPage(data: [foundItem]);
+      },
+    );
   }
 }

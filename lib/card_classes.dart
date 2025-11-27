@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/item_pages.dart';
 
 class Card extends StatelessWidget {
   final String title;
@@ -48,6 +49,7 @@ class ProductCard extends Card {
     required this.price,
     required super.imageUrl,
     required super.routeName,
+    
   });
   @override
   Widget build(BuildContext context) {
@@ -56,7 +58,7 @@ class ProductCard extends Card {
     );
 
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, routeName),
+      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => AutumnKnitScarfPage(routeName: routeName,))),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
