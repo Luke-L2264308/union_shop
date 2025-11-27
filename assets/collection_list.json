@@ -116,7 +116,7 @@
             "title": "Classic Logo T Shirt",
             "price": "£18.00",
             "imageLocation": "assets/images/clothing/clothing-tee.png",
-            "routeName": "/collection/clothing/classic-logo-tshirt",
+            "routeName": "/collection/clothing/classic-logo-t-shirt",
             "description": "A comfortable classic logo t-shirt made from soft cotton.", "sizes": ["S", "M", "L", "XL"], "colours": ["Red", "Blue", "Black", "White"]
         },
         {
@@ -160,7 +160,7 @@
             "title": "Cap and Tassel Set",
             "price": "£24.99",
             "imageLocation": "assets/images/graduation/cap-tassel-set.png",
-            "routeName": "/collection/graduation/cap-tassel-set",
+            "routeName": "/collection/graduation/cap-and-tassel-set",
             "description": "A classic cap and tassel set to complete your graduation attire.", "sizes": [], "colours": []
         },
         {
