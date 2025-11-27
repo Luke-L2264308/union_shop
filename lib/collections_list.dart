@@ -6,7 +6,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 Future<List<Map<String, dynamic>>> loadCollections(String category) async {
-  final String jsonString = await rootBundle.loadString('collection_list.json');
+  final String jsonString = await rootBundle.loadString('assets/collection_list.json');
   final Map<String, dynamic> jsonData = json.decode(jsonString);
   return List<Map<String, dynamic>>.from(jsonData[category]);
 }
