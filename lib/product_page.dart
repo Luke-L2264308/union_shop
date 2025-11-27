@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/header.dart';
-class ProductPage extends StatelessWidget {
-  const ProductPage({super.key});
 
+class ProductPage extends StatelessWidget {
+  const ProductPage({super.key, required this.data});
+  final List<Map<String, dynamic>> data;
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
@@ -13,6 +14,10 @@ class ProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String title = data[0]["title"];
+    final String description = data[0]["description"];
+    final String imageLocation = data[0]["imageLocation"];
+    final String price = data[0]["price"];
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -37,7 +42,7 @@ class ProductPage extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: Image.network(
-                        'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                        imageLocation,
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) {
                           return Container(
@@ -68,9 +73,9 @@ class ProductPage extends StatelessWidget {
                   const SizedBox(height: 24),
 
                   // Product name
-                  const Text(
-                    'Placeholder Product Name',
-                    style: TextStyle(
+                  Text(
+                    title,
+                    style: const TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
@@ -80,9 +85,9 @@ class ProductPage extends StatelessWidget {
                   const SizedBox(height: 12),
 
                   // Product price
-                  const Text(
-                    '£15.00',
-                    style: TextStyle(
+                  Text(
+                    price,
+                    style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF4d2963),
@@ -101,9 +106,9 @@ class ProductPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
-                    'This is a placeholder description for the product. Students should replace this with real product information and implement proper data management.',
-                    style: TextStyle(
+                  Text(
+                    description,
+                    style: const TextStyle(
                       fontSize: 16,
                       color: Colors.grey,
                       height: 1.5,

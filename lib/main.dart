@@ -5,6 +5,7 @@ import 'package:union_shop/product_page.dart';
 import 'package:union_shop/aboutus_page.dart';
 import 'card_classes.dart';
 import 'collections_list.dart';
+import 'item_pages.dart';
 void main() {
   runApp(const UnionShopApp());
 }
@@ -26,7 +27,6 @@ class UnionShopApp extends StatelessWidget {
       // When navigating to '/product', build and return the ProductPage
       // In your browser, try this link: http://localhost:49856/#/product
       routes: {
-        '/product': (context) => const ProductPage(),
         '/aboutus': (context) => const AboutUsPage(),
         '/collection': (context) => const Collections(),
         '/collection/autumn-favourites': (context) => const AutumnFavouritesPage(),
@@ -35,6 +35,7 @@ class UnionShopApp extends StatelessWidget {
         '/collection/graduation': (context) => const GraduationPage(),
         '/collection/merchandise': (context) => const MerchandisePage(),
         '/collection/personalisation': (context) => const PersonalisationPage(),
+        '/autumn-favourites/autumn-knit-scarf': (context) => const AutumnKnitScarfPage(),
 
         
 
