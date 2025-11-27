@@ -14,29 +14,18 @@ class Card extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, routeName);
-      },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Image.asset(
-              imageUrl,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  color: Colors.grey[300],
-                  child: const Center(
-                    child: Icon(Icons.image_not_supported, color: Colors.grey),
-                  ),
-                );
-              },
-            ),
+    
+    return Image.asset(
+      imageUrl,
+      fit: BoxFit.cover,
+      errorBuilder: (context, error, stackTrace) {
+        return Container(
+          color: Colors.grey[300],
+          child: const Center(
+            child: Icon(Icons.image_not_supported, color: Colors.grey),
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
@@ -49,7 +38,6 @@ class ProductCard extends Card {
     required this.price,
     required super.imageUrl,
     required super.routeName,
-    
   });
   @override
   Widget build(BuildContext context) {
@@ -58,7 +46,12 @@ class ProductCard extends Card {
     );
 
     return GestureDetector(
-      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => AutumnKnitScarfPage(routeName: routeName,))),
+      onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (_) => AutumnKnitScarfPage(
+                    routeName: routeName,
+                  ))),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
