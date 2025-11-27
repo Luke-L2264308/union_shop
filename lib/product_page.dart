@@ -13,12 +13,27 @@ class ProductPage extends StatelessWidget {
     // This is the event handler for buttons that don't work yet
   }
 
+  List<DropdownMenuEntry<String>> _buildDropdownEntries(String attribute) {
+    List<DropdownMenuEntry<String>> entries = [];
+    for (int i = 0; i < data[0][attribute].length; i++) {
+      DropdownMenuEntry<String> newEntry = DropdownMenuEntry<String>(
+        value: data[0][attribute][i],
+        label: data[0][attribute][i].toString(),
+      );
+      entries.add(newEntry);
+    }
+    return entries;
+  }
+
   @override
   Widget build(BuildContext context) {
     final String title = data[0]["title"];
     final String description = data[0]["description"];
     final String imageLocation = data[0]["imageLocation"];
     final String price = data[0]["price"];
+    final List<dynamic> sizes = data[0]["sizes"];
+    final List<dynamic> colours = data[0]["colours"];
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -115,6 +130,30 @@ class ProductPage extends StatelessWidget {
                       height: 1.5,
                     ),
                   ),
+                  const SizedBox(height: 24),
+                  Row(children: [
+                    if (colours.isNotEmpty) ...[
+                    Column(
+                      children: [
+                        const Text('Colours Available:'),
+                        DropdownMenu<String>(
+                          initialSelection: colours[0],
+                          dropdownMenuEntries: _buildDropdownEntries("colours"),
+                        ),
+                      ],
+                    ),],
+                    if (sizes.isNotEmpty) ...[
+                    const SizedBox(width: 40),
+                    Column(
+                      children: [
+                        const Text('Sizes Available:'),
+                        DropdownMenu<String>(
+                          initialSelection: sizes[0],
+                          dropdownMenuEntries: _buildDropdownEntries("sizes"),
+                        ),
+                      ],
+                    )]
+                  ])
                 ],
               ),
             ),
