@@ -194,7 +194,7 @@ class HomeScreen extends StatelessWidget {
                           title: 'Placeholder Collection 1',
                           description: 'This is a placeholder description for Collection 1.',
                           imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                            "assets/images/collections/black-friday.png",
                           routeName: '/collection',
                         ),
                       ],
