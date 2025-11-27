@@ -21,3 +21,10 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+    - assets/images/autumn-favourites/
+    - assets/images/black-friday/
+    - assets/images/clothing/
+    - assets/images/collections/
+    - assets/images/graduation/
+    - assets/images/merchandise/
+    - assets/images/personalisation/
