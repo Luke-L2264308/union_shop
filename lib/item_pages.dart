@@ -18,18 +18,18 @@ class AutumnKnitScarfPage extends StatelessWidget {
     // expected: ['/','collection-slug','item-slug'] -> use parts[1] and parts[2]
     final collectionSlug = parts.length > 1 ? parts[1] : '';
     final itemSlug = parts.length > 2 ? parts[2] : '';
-    String _pretty(String slug) {
+    String pretty(String slug) {
       final pieces = slug.split('-');
       return pieces
           .where((p) => p.isNotEmpty)
-          .map((p) => p.length > 0
+          .map((p) => p.isNotEmpty
               ? '${p[0].toUpperCase()}${p.substring(1).toLowerCase()}'
               : p)
           .join(' ');
     }
 
-    final collectionName = _pretty(collectionSlug);
-    final itemName = _pretty(itemSlug);
+    final collectionName = pretty(collectionSlug);
+    final itemName = pretty(itemSlug);
 
     return FutureBuilder<List<dynamic>>(
       future: loadCollections(collectionName),

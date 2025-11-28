@@ -91,7 +91,7 @@ class CollectionCard extends Card {
 
           // The translucent grey overlay
           Container(
-            color: Colors.black.withOpacity(0.4),
+            color: Colors.black.withAlpha(102),
           ),
 
           // The text in the center
