@@ -3,32 +3,32 @@
         {
             "title": "Autumn Favourites",
             "imageLocation": "assets/images/collections/autumn-favourites.png",
-            "routeName": "/collection/autumn-favourites"
+            "routeName": "/collection/autumn-favourites", "description": "Cozy up with our handpicked autumn favourites."
         },
         {
             "title": "Black Friday",
             "imageLocation": "assets/images/collections/black-friday.png",
-            "routeName": "/collection/black-friday"
+            "routeName": "/collection/black-friday", "description": "Don't miss out on our biggest Black Friday deals."
         },
         {
             "title": "Clothing",
             "imageLocation": "assets/images/collections/clothing.png",
-            "routeName": "/collection/clothing"
+            "routeName": "/collection/clothing", "description": "Explore our latest clothing collections."
         },
         {
             "title": "Graduation",
             "imageLocation": "assets/images/collections/graduation.png",
-            "routeName": "/collection/graduation"
+            "routeName": "/collection/graduation", "description": "Celebrate your achievements with our graduation collection."
         },
         {
             "title": "Merchandise",
             "imageLocation": "assets/images/collections/merchandise.png",
-            "routeName": "/collection/merchandise"
+            "routeName": "/collection/merchandise", "description": "Check out our exclusive merchandise."
         },
         {
             "title": "Personalisation",
             "imageLocation": "assets/images/collections/personalisation.png",
-            "routeName": "/collection/personalisation"
+            "routeName": "/collection/personalisation", "description": "Add a personal touch with our customisation options."
         }
     ],
     "Autumn Favourites":  [
