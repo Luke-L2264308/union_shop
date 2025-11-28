@@ -67,7 +67,24 @@ FutureBuilder<List<Map<String, dynamic>>> buildCollectionsFutureBuilder(
 class PageMaster extends StatelessWidget {
   final Widget? child;
   const PageMaster({super.key, this.child});
-
+  List<DropdownMenuEntry<String>> get dropdownMenuEntries => [
+        const DropdownMenuEntry<String>(
+          value: 'alphabeticala-z',
+          label: 'Alphabetical (A-Z)',
+        ),
+        const DropdownMenuEntry<String>(
+          value: 'alphabeticalz-a',
+          label: 'Alphabetical (Z-A)',
+        ),
+        const DropdownMenuEntry<String>(
+          value: 'priceLowHigh',
+          label: 'Price (Low-High)',
+        ),
+        const DropdownMenuEntry<String>(
+          value: 'priceHighLow',
+          label: 'Price (High-Low)',
+        ),
+      ];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -82,7 +99,7 @@ class PageMaster extends StatelessWidget {
                   // main content column (Header + provided child)
                   Column(
                     children: [
-                      const Header(),
+                      const Header(), const Text('filters'),DropdownMenu(dropdownMenuEntries: dropdownMenuEntries),
                       if (child != null) Padding(
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
                         child: child!,
