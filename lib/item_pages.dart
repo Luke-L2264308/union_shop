@@ -18,7 +18,6 @@ class AutumnKnitScarfPage extends StatelessWidget {
     // expected: ['/','collection-slug','item-slug'] -> use parts[1] and parts[2]
     final collectionSlug = parts.length > 1 ? parts[1] : '';
     final itemSlug = parts.length > 2 ? parts[2] : '';
-
     String _pretty(String slug) {
       final pieces = slug.split('-');
       return pieces

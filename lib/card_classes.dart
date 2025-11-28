@@ -46,12 +46,8 @@ class ProductCard extends Card {
     );
 
     return GestureDetector(
-      onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (_) => AutumnKnitScarfPage(
-                    routeName: routeName,
-                  ))),
+      onTap: () => Navigator.pushNamed(context, routeName),
+
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

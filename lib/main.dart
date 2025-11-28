@@ -35,10 +35,22 @@ class UnionShopApp extends StatelessWidget {
         '/collection/graduation': (context) => const GraduationPage(),
         '/collection/merchandise': (context) => const MerchandisePage(),
         '/collection/personalisation': (context) => const PersonalisationPage(),
-
+        
         
 
       },
+      onGenerateRoute: (RouteSettings settings) {
+      final name = settings.name ?? '';
+      final uri = Uri.parse(name);
+      // handle routes like /collection/<collection-slug>/<item-slug>
+      if (uri.pathSegments.length >= 3 && uri.pathSegments[0] == 'collection') {
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => AutumnKnitScarfPage(routeName: name),
+        );
+      }
+      return null; // fall back to routes map or default
+    },
     );
   }
 }
