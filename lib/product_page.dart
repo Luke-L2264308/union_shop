@@ -178,23 +178,28 @@ class _ProductPageState extends State<ProductPage> {
                           ),
                         ],
                       )
-                    ]
-                  ]),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text('Quantity: '),
-                      IconButton(
-                        onPressed: _decreaseQuantity,
-                        icon: const Icon(Icons.remove),
-                      ),
-                      Text('$_quantity'.toString()),
-                      IconButton(
-                        onPressed: _increaseQuantity,
-                        icon: const Icon(Icons.add),
-                      ),
                     ],
-                  ),
+                    const SizedBox(width: 40),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('Quantity: '),
+                        Row(
+                          children: [
+                            IconButton(
+                              onPressed: _decreaseQuantity,
+                              icon: const Icon(Icons.remove),
+                            ),
+                            Text('$_quantity'.toString()),
+                            IconButton(
+                              onPressed: _increaseQuantity,
+                              icon: const Icon(Icons.add),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ]),
                 ],
               ),
             ),
