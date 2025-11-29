@@ -6,6 +6,7 @@ import 'package:union_shop/aboutus_page.dart';
 import 'card_classes.dart';
 import 'collections_list.dart';
 import 'item_pages.dart';
+import 'signin.dart';
 void main() {
   runApp(const UnionShopApp());
 }
@@ -35,6 +36,7 @@ class UnionShopApp extends StatelessWidget {
         '/collection/graduation': (context) => const GraduationPage(),
         '/collection/merchandise': (context) => const MerchandisePage(),
         '/collection/personalisation': (context) => const PersonalisationPage(),
+        '/signin': (context) => const SignInPage(),
         
         
 

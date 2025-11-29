@@ -19,6 +19,9 @@ class Header extends StatelessWidget {
   void navigateToAboutUs(BuildContext context) {
     Navigator.pushNamed(context, '/aboutus');
   }
+  void navigateToSignIn(BuildContext context) {
+    Navigator.pushNamed(context, '/signin');
+  }
 
   void placeholderCallbackForButtons() {}
 
@@ -124,7 +127,7 @@ class Header extends StatelessWidget {
                         buildIconButton(
                             Icons.search, placeholderCallbackForButtons),
                         buildIconButton(Icons.person_outline,
-                            placeholderCallbackForButtons),
+                            () => navigateToSignIn(context)),
                         buildIconButton(Icons.shopping_bag_outlined,
                             placeholderCallbackForButtons),
                         if (MediaQuery.of(context).size.width <= 800) ...[
