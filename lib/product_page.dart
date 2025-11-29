@@ -68,144 +68,150 @@ class _ProductPageState extends State<ProductPage> {
               color: Colors.white,
               padding: const EdgeInsets.all(24),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Product image
-                  Container(
-                    height: 300,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.grey[200],
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Product image
+                    Container(
+                      height: 300,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.grey[200],
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.network(
+                          imageLocation,
+                          fit: BoxFit.contain,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: Colors.grey[300],
+                              child: const Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.image_not_supported,
+                                      size: 64,
+                                      color: Colors.grey,
+                                    ),
+                                    SizedBox(height: 8),
+                                    Text(
+                                      'Image unavailable',
+                                      style: TextStyle(color: Colors.grey),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
                     ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Image.network(
-                        imageLocation,
-                        fit: BoxFit.contain,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Container(
-                            color: Colors.grey[300],
-                            child: const Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
+
+                    const SizedBox(height: 24),
+
+                    // Product name
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+
+                    const SizedBox(height: 12),
+
+                    // Product price
+                    Text(
+                      price,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF4d2963),
+                      ),
+                    ),
+
+                    const SizedBox(height: 24),
+
+                    // Product description
+                    const Text(
+                      'Description',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      description,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey,
+                        height: 1.5,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    GridView.count(
+                        crossAxisCount:
+                            MediaQuery.of(context).size.width > 500 ? 3 : 1,
+                        mainAxisSpacing: 8,
+                        crossAxisSpacing: 8,
+                        childAspectRatio: MediaQuery.of(context).size.width > 500
+                            ? 3
+                            : 4.8,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        children: [
+                          if (colours.isNotEmpty) ...[
+                            Column(
+                              children: [
+                                const Text('Colours Available:'),
+                                DropdownMenu<String>(
+                                  initialSelection: colours[0],
+                                  dropdownMenuEntries:
+                                      _buildDropdownEntries("colours"),
+                                ),
+                              ],
+                            ),
+                          ],
+                          if (sizes.isNotEmpty) ...[
+                            Column(
+                              children: [
+                                const Text('Sizes Available:'),
+                                DropdownMenu<String>(
+                                  initialSelection: sizes[0],
+                                  dropdownMenuEntries:
+                                      _buildDropdownEntries("sizes"),
+                                ),
+                              ],
+                            )
+                          ],
+                          Column(
+                            children: [
+                              const Text('Quantity: '),
+                              Row(mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(
-                                    Icons.image_not_supported,
-                                    size: 64,
-                                    color: Colors.grey,
+                                  IconButton(
+                                    onPressed: _decreaseQuantity,
+                                    icon: const Icon(Icons.remove),
                                   ),
-                                  SizedBox(height: 8),
-                                  Text(
-                                    'Image unavailable',
-                                    style: TextStyle(color: Colors.grey),
+                                  Text('$_quantity'.toString()),
+                                  IconButton(
+                                    onPressed: _increaseQuantity,
+                                    icon: const Icon(Icons.add),
                                   ),
                                 ],
                               ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 24),
-
-                  // Product name
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  // Product price
-                  Text(
-                    price,
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF4d2963),
-                    ),
-                  ),
-
-                  const SizedBox(height: 24),
-
-                  // Product description
-                  const Text(
-                    'Description',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    description,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey,
-                      height: 1.5,
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  Row(children: [
-                    if (colours.isNotEmpty) ...[
-                      Column(
-                        children: [
-                          const Text('Colours Available:'),
-                          DropdownMenu<String>(
-                            initialSelection: colours[0],
-                            dropdownMenuEntries:
-                                _buildDropdownEntries("colours"),
+                            ],
                           ),
-                        ],
-                      ),
-                    ],
-                    if (sizes.isNotEmpty) ...[
-                      const SizedBox(width: 40),
-                      Column(
-                        children: [
-                          const Text('Sizes Available:'),
-                          DropdownMenu<String>(
-                            initialSelection: sizes[0],
-                            dropdownMenuEntries: _buildDropdownEntries("sizes"),
-                          ),
-                        ],
-                      )
-                    ],
-                    const SizedBox(width: 40),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text('Quantity: '),
-                        Row(
-                          children: [
-                            IconButton(
-                              onPressed: _decreaseQuantity,
-                              icon: const Icon(Icons.remove),
-                            ),
-                            Text('$_quantity'.toString()),
-                            IconButton(
-                              onPressed: _increaseQuantity,
-                              icon: const Icon(Icons.add),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                        ]),
                   ]),
-                ],
-              ),
-            ),
-
-            const Footer()
-          ],
+            )
+                ,const Footer(),
+],
         ),
       ),
     );
