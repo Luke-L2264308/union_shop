@@ -2,9 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/footer.dart';
 import 'package:union_shop/header.dart';
 
-class ProductPage extends StatelessWidget {
+class ProductPage extends StatefulWidget {
   const ProductPage({super.key, required this.data});
   final List<Map<String, dynamic>> data;
+
+  @override
+  State<ProductPage> createState() => _ProductPageState();
+}
+
+class _ProductPageState extends State<ProductPage> {
+  List<Map<String, dynamic>> get data => widget.data;
+  @override
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
@@ -23,6 +31,21 @@ class ProductPage extends StatelessWidget {
       entries.add(newEntry);
     }
     return entries;
+  }
+
+  int _quantity = 1;
+  void _decreaseQuantity() {
+    if (_quantity > 1) {
+      setState(() {
+        _quantity--;
+      });
+    }
+  }
+
+  void _increaseQuantity() {
+    setState(() {
+      _quantity++;
+    });
   }
 
   @override
@@ -133,27 +156,45 @@ class ProductPage extends StatelessWidget {
                   const SizedBox(height: 24),
                   Row(children: [
                     if (colours.isNotEmpty) ...[
-                    Column(
-                      children: [
-                        const Text('Colours Available:'),
-                        DropdownMenu<String>(
-                          initialSelection: colours[0],
-                          dropdownMenuEntries: _buildDropdownEntries("colours"),
-                        ),
-                      ],
-                    ),],
+                      Column(
+                        children: [
+                          const Text('Colours Available:'),
+                          DropdownMenu<String>(
+                            initialSelection: colours[0],
+                            dropdownMenuEntries:
+                                _buildDropdownEntries("colours"),
+                          ),
+                        ],
+                      ),
+                    ],
                     if (sizes.isNotEmpty) ...[
-                    const SizedBox(width: 40),
-                    Column(
-                      children: [
-                        const Text('Sizes Available:'),
-                        DropdownMenu<String>(
-                          initialSelection: sizes[0],
-                          dropdownMenuEntries: _buildDropdownEntries("sizes"),
-                        ),
-                      ],
-                    )]
-                  ])
+                      const SizedBox(width: 40),
+                      Column(
+                        children: [
+                          const Text('Sizes Available:'),
+                          DropdownMenu<String>(
+                            initialSelection: sizes[0],
+                            dropdownMenuEntries: _buildDropdownEntries("sizes"),
+                          ),
+                        ],
+                      )
+                    ]
+                  ]),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('Quantity: '),
+                      IconButton(
+                        onPressed: _decreaseQuantity,
+                        icon: const Icon(Icons.remove),
+                      ),
+                      Text('$_quantity'.toString()),
+                      IconButton(
+                        onPressed: _increaseQuantity,
+                        icon: const Icon(Icons.add),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),

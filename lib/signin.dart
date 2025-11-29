@@ -9,9 +9,18 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   @override
+  void dispose() {
+    // dispose controllers to avoid memory leaks
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Sign In'),
