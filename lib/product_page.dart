@@ -5,6 +5,7 @@ import 'package:union_shop/header.dart';
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key, required this.data});
   final List<Map<String, dynamic>> data;
+  
 
   @override
   State<ProductPage> createState() => _ProductPageState();
@@ -12,6 +13,8 @@ class ProductPage extends StatefulWidget {
 
 class _ProductPageState extends State<ProductPage> {
   List<Map<String, dynamic>> get data => widget.data;
+  String? _colourSelected;
+  String? _sizeSelected;
   @override
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
@@ -48,6 +51,17 @@ class _ProductPageState extends State<ProductPage> {
     });
   }
 
+  void addToCart(String? colour, String? size, String title) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+          content: Text('Added $_quantity $colour $size $title to cart.')),
+    );
+  }
+  void initState() {
+    super.initState();
+    _colourSelected = data[0]["colours"].isNotEmpty ? data[0]["colours"][0] : '';
+    _sizeSelected = data[0]["sizes"].isNotEmpty ? data[0]["sizes"][0] : '';
+  }
   @override
   Widget build(BuildContext context) {
     final String title = data[0]["title"];
@@ -56,7 +70,7 @@ class _ProductPageState extends State<ProductPage> {
     final String price = data[0]["price"];
     final List<dynamic> sizes = data[0]["sizes"];
     final List<dynamic> colours = data[0]["colours"];
-
+    
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -159,9 +173,8 @@ class _ProductPageState extends State<ProductPage> {
                             MediaQuery.of(context).size.width > 500 ? 3 : 1,
                         mainAxisSpacing: 8,
                         crossAxisSpacing: 8,
-                        childAspectRatio: MediaQuery.of(context).size.width > 500
-                            ? 3
-                            : 4.8,
+                        childAspectRatio:
+                            MediaQuery.of(context).size.width > 500 ? 3 : 4.8,
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         children: [
@@ -170,9 +183,10 @@ class _ProductPageState extends State<ProductPage> {
                               children: [
                                 const Text('Colours Available:'),
                                 DropdownMenu<String>(
-                                  initialSelection: colours[0],
+                                  initialSelection: _colourSelected,
                                   dropdownMenuEntries:
                                       _buildDropdownEntries("colours"),
+                                    onSelected: (String? v) => setState(() => _colourSelected = v) ,
                                 ),
                               ],
                             ),
@@ -182,9 +196,10 @@ class _ProductPageState extends State<ProductPage> {
                               children: [
                                 const Text('Sizes Available:'),
                                 DropdownMenu<String>(
-                                  initialSelection: sizes[0],
+                                  initialSelection: _sizeSelected,
                                   dropdownMenuEntries:
                                       _buildDropdownEntries("sizes"),
+                                  onSelected: (String? v) => setState(() => _sizeSelected = v)
                                 ),
                               ],
                             )
@@ -192,7 +207,8 @@ class _ProductPageState extends State<ProductPage> {
                           Column(
                             children: [
                               const Text('Quantity: '),
-                              Row(mainAxisAlignment: MainAxisAlignment.center,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   IconButton(
                                     onPressed: _decreaseQuantity,
@@ -208,10 +224,27 @@ class _ProductPageState extends State<ProductPage> {
                             ],
                           ),
                         ]),
+                    ElevatedButton.icon(
+                      onPressed: () => addToCart(
+                          _colourSelected, _sizeSelected, title),
+                      icon: const SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: FittedBox(
+                          fit: BoxFit.contain,
+                          child: Icon(Icons.shopping_cart),
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green,
+                        foregroundColor: Colors.white,
+                      ),
+                      label: const Text('Add to Cart'),
+                    ),
                   ]),
-            )
-                ,const Footer(),
-],
+            ),
+            const Footer(),
+          ],
         ),
       ),
     );
