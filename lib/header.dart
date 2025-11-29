@@ -68,10 +68,18 @@ class Header extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 8),
             color: const Color(0xFF4d2963),
-            child: const Text(
-              'PLACEHOLDER HEADER TEXT',
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white, fontSize: 16),
+            child: Row(
+              children: [
+                if (Navigator.canPop(context))
+                  buildIconButton(Icons.arrow_back_ios, () {
+                    Navigator.pop(context);
+                  }),
+                const Text(
+                  'PLACEHOLDER HEADER TEXT',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ),
+              ],
             ),
           ),
           // Main header
@@ -131,8 +139,10 @@ class Header extends StatelessWidget {
                                   .toList();
                             },
                             onSelected: (item) => item.onPressed(),
+                          
                           )
-                        ]
+                        ],
+                        
                       ],
                     ),
                   ),
