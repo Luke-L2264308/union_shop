@@ -6,7 +6,8 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 Future<List<Map<String, dynamic>>> loadCollections(String category) async {
-  final String jsonString = await rootBundle.loadString('assets/collection_list.json');
+  final String jsonString =
+      await rootBundle.loadString('assets/collection_list.json');
   final Map<String, dynamic> jsonData = json.decode(jsonString);
   return List<Map<String, dynamic>>.from(jsonData[category]);
 }
@@ -23,7 +24,22 @@ List<Widget> buildCollectionCards(List<Map<String, dynamic>> collections) {
   }).toList();
 }
 
-List<Widget> buildProductCards(List<Map<String, dynamic>> collections) {
+List<Widget> buildProductCards(List<Map<String, dynamic>> collections,
+    {String sortBy = 'alphabeticala-z'}) {
+  if (sortBy == 'alphabeticala-z') {
+    collections
+        .sort((a, b) => a['title'].toString().compareTo(b['title'].toString()));
+  } else if (sortBy == 'alphabeticalz-a') {
+    collections
+        .sort((a, b) => b['title'].toString().compareTo(a['title'].toString()));
+  } else if (sortBy == 'priceLowHigh') {
+    collections.sort(
+        (a, b) => (a['price'].toString()).compareTo(b['price'].toString()));
+  } else if (sortBy == 'priceHighLow') {
+    collections.sort(
+        (a, b) => (b['price'].toString()).compareTo(a['price'].toString()));
+  }
+
   return collections.map((collection) {
     return ProductCard(
       title: collection['title'],
@@ -64,9 +80,18 @@ FutureBuilder<List<Map<String, dynamic>>> buildCollectionsFutureBuilder(
   );
 }
 
-class PageMaster extends StatelessWidget {
-  final Widget? child;
-  const PageMaster({super.key, this.child});
+class PageMaster extends StatefulWidget {
+  final Widget Function(String sortBy) childBuilder;
+  final bool showFilters;
+  const PageMaster(
+      {super.key, required this.childBuilder, this.showFilters = true});
+
+  @override
+  State<PageMaster> createState() => _PageMasterState();
+}
+
+class _PageMasterState extends State<PageMaster> {
+  String _selectedSort = 'alphabeticala-z';
   List<DropdownMenuEntry<String>> get dropdownMenuEntries => [
         const DropdownMenuEntry<String>(
           value: 'alphabeticala-z',
@@ -99,10 +124,24 @@ class PageMaster extends StatelessWidget {
                   // main content column (Header + provided child)
                   Column(
                     children: [
-                      const Header(), const Text('filters'),DropdownMenu(dropdownMenuEntries: dropdownMenuEntries),
-                      if (child != null) Padding(
+                      const Header(),
+                      if (widget.showFilters) ...[
+                        const Text('filters'),
+                        DropdownMenu<String>(
+                          initialSelection: _selectedSort,
+                          dropdownMenuEntries: dropdownMenuEntries,
+                          onSelected: (String? v) {
+                            if (v == null) return;
+                            setState(() {
+                              _selectedSort = v;
+                            });
+                          },
+                        ),
+                      ],
+                      // build the page content using the current sort key
+                      Padding(
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
-                        child: child!,
+                        child: widget.childBuilder(_selectedSort),
                       ),
                     ],
                   ),
@@ -118,6 +157,7 @@ class PageMaster extends StatelessWidget {
     );
   }
 }
+// ...existing code...
 
 class Collections extends StatelessWidget {
   const Collections({super.key});
@@ -125,7 +165,8 @@ class Collections extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageMaster(
-        child: buildCollectionsFutureBuilder(
+        showFilters: false,
+        childBuilder: (sortBy) => buildCollectionsFutureBuilder(
           loadCollections('categories'),
           context,
           buildCollectionCards,
@@ -141,10 +182,10 @@ class AutumnFavouritesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageMaster(
-        child: buildCollectionsFutureBuilder(
+        childBuilder: (sortBy) => buildCollectionsFutureBuilder(
           loadCollections('Autumn Favourites'),
           context,
-          buildProductCards,
+          (list) => buildProductCards(list, sortBy: sortBy),
         ),
       ),
     );
@@ -157,25 +198,26 @@ class BlackFridayPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageMaster(
-        child: buildCollectionsFutureBuilder(
+        childBuilder: (sortBy) => buildCollectionsFutureBuilder(
           loadCollections('Black Friday'),
           context,
-          buildProductCards,
+          (list) => buildProductCards(list, sortBy: sortBy),
         ),
       ),
     );
   }
 }
+
 class ClothingPage extends StatelessWidget {
   const ClothingPage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageMaster(
-        child: buildCollectionsFutureBuilder(
+        childBuilder: (sortBy) => buildCollectionsFutureBuilder(
           loadCollections('Clothing'),
           context,
-          buildProductCards,
+          (list) => buildProductCards(list, sortBy: sortBy),
         ),
       ),
     );
@@ -188,10 +230,10 @@ class GraduationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageMaster(
-        child: buildCollectionsFutureBuilder(
+        childBuilder: (sortBy) => buildCollectionsFutureBuilder(
           loadCollections('Graduation'),
           context,
-          buildProductCards,
+          (list) => buildProductCards(list, sortBy: sortBy),
         ),
       ),
     );
@@ -204,10 +246,10 @@ class MerchandisePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageMaster(
-        child: buildCollectionsFutureBuilder(
+        childBuilder: (sortBy) => buildCollectionsFutureBuilder(
           loadCollections('Merchandise'),
           context,
-          buildProductCards,
+          (list) => buildProductCards(list, sortBy: sortBy),
         ),
       ),
     );
@@ -220,10 +262,10 @@ class PersonalisationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageMaster(
-        child: buildCollectionsFutureBuilder(
+        childBuilder: (sortBy) => buildCollectionsFutureBuilder(
           loadCollections('Personalisation'),
           context,
-          buildProductCards,
+          (list) => buildProductCards(list, sortBy: sortBy),
         ),
       ),
     );
