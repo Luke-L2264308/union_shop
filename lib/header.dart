@@ -22,6 +22,9 @@ class Header extends StatelessWidget {
   void navigateToSignIn(BuildContext context) {
     Navigator.pushNamed(context, '/signin');
   }
+  void navigateToCart(BuildContext context) {
+    Navigator.pushNamed(context, '/cart');
+  }
 
   void placeholderCallbackForButtons() {}
 
@@ -129,7 +132,7 @@ class Header extends StatelessWidget {
                         buildIconButton(Icons.person_outline,
                             () => navigateToSignIn(context)),
                         buildIconButton(Icons.shopping_bag_outlined,
-                            placeholderCallbackForButtons),
+                            () => navigateToCart(context)),
                         if (MediaQuery.of(context).size.width <= 800) ...[
                           PopupMenuButton<HeaderItem>(
                             icon: const Icon(Icons.menu,

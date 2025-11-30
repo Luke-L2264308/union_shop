@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/footer.dart';
 import 'package:union_shop/header.dart';
 
+import 'dart:convert';
+import 'package:union_shop/cart_storage.dart';
+
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key, required this.data});
   final List<Map<String, dynamic>> data;
-  
 
   @override
   State<ProductPage> createState() => _ProductPageState();
@@ -15,7 +17,7 @@ class _ProductPageState extends State<ProductPage> {
   List<Map<String, dynamic>> get data => widget.data;
   String? _colourSelected;
   String? _sizeSelected;
-  @override
+  
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
@@ -53,15 +55,36 @@ class _ProductPageState extends State<ProductPage> {
 
   void addToCart(String? colour, String? size, String title) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-          content: Text('Added $_quantity $colour $size $title to cart.')),
+      SnackBar(content: Text('Added $_quantity $colour $size $title to cart.')),
     );
+    // Append cart item as a JSON line to a local file:
+
+    () async {
+      try {
+        final item = {
+          'title': title,
+          'colour': colour ?? '',
+          'size': size ?? '',
+          'quantity': _quantity,
+          'addedAt': DateTime.now().toIso8601String(),
+        };
+
+        await appendCartItem(item);
+      } catch (e, st) {
+        // Log failure but don't crash the UI
+        // ignore: avoid_print
+        print('Failed to write cart storage: $e\n$st');
+      }
+    }();
   }
+  @override
   void initState() {
     super.initState();
-    _colourSelected = data[0]["colours"].isNotEmpty ? data[0]["colours"][0] : '';
+    _colourSelected =
+        data[0]["colours"].isNotEmpty ? data[0]["colours"][0] : '';
     _sizeSelected = data[0]["sizes"].isNotEmpty ? data[0]["sizes"][0] : '';
   }
+
   @override
   Widget build(BuildContext context) {
     final String title = data[0]["title"];
@@ -70,7 +93,7 @@ class _ProductPageState extends State<ProductPage> {
     final String price = data[0]["price"];
     final List<dynamic> sizes = data[0]["sizes"];
     final List<dynamic> colours = data[0]["colours"];
-    
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -186,7 +209,8 @@ class _ProductPageState extends State<ProductPage> {
                                   initialSelection: _colourSelected,
                                   dropdownMenuEntries:
                                       _buildDropdownEntries("colours"),
-                                    onSelected: (String? v) => setState(() => _colourSelected = v) ,
+                                  onSelected: (String? v) =>
+                                      setState(() => _colourSelected = v),
                                 ),
                               ],
                             ),
@@ -196,11 +220,11 @@ class _ProductPageState extends State<ProductPage> {
                               children: [
                                 const Text('Sizes Available:'),
                                 DropdownMenu<String>(
-                                  initialSelection: _sizeSelected,
-                                  dropdownMenuEntries:
-                                      _buildDropdownEntries("sizes"),
-                                  onSelected: (String? v) => setState(() => _sizeSelected = v)
-                                ),
+                                    initialSelection: _sizeSelected,
+                                    dropdownMenuEntries:
+                                        _buildDropdownEntries("sizes"),
+                                    onSelected: (String? v) =>
+                                        setState(() => _sizeSelected = v)),
                               ],
                             )
                           ],
@@ -225,8 +249,8 @@ class _ProductPageState extends State<ProductPage> {
                           ),
                         ]),
                     ElevatedButton.icon(
-                      onPressed: () => addToCart(
-                          _colourSelected, _sizeSelected, title),
+                      onPressed: () =>
+                          addToCart(_colourSelected, _sizeSelected, title),
                       icon: const SizedBox(
                         width: 20,
                         height: 20,
