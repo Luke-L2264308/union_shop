@@ -76,3 +76,23 @@ Future<void> removeCartItem({
       (e['colour'] ?? '') == colour);
   await writeCartItems(items);
 }
+
+// Increase quantity by `count`; if the item doesn't exist, append it with that quantity.
+Future<void> increaseCartItemQuantity({
+  required String title,
+  required String size,
+  required String colour,
+  required int count,
+}) async {
+  final items = await readCartItems();
+  final idx = items.indexWhere((e) =>
+      (e['title'] ?? '') == title &&
+      (e['size'] ?? '') == size &&
+      (e['colour'] ?? '') == colour);
+
+  final current = items[idx]['quantity'] as int;
+  items[idx]['quantity'] = current + count;
+  items[idx]['addedAt'] = DateTime.now().toIso8601String();
+
+  await writeCartItems(items);
+}
