@@ -5,28 +5,64 @@ import 'package:union_shop/footer.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 
+
 Future<List<Map<String, dynamic>>> loadCollections(String category) async {
   final String jsonString =
       await rootBundle.loadString('assets/collection_list.json');
   final Map<String, dynamic> jsonData = json.decode(jsonString);
-  return List<Map<String, dynamic>>.from(jsonData[category]);
+
+  final List<Map<String, dynamic>> list =
+      List<Map<String, dynamic>>.from(jsonData[category] ?? []);
+
+  // Normalize description key so callers can just look for 'description'
+  if (list.isNotEmpty && list.first.containsKey('collectiondescription')) {
+    final first = Map<String, dynamic>.from(list.first);
+    first['description'] = first['collectiondescription'];
+    list[0] = first;
+  }
+
+  return list;
 }
 
 Future<List<Map<String, dynamic>>> loadFeatured() async {
   final String jsonString =
       await rootBundle.loadString('assets/collection_list.json');
   final Map<String, dynamic> jsonData = json.decode(jsonString);
-  List<Map<String, dynamic>> featured = [];
-  for (int i = 0; i < jsonData['featured'].length; i++) {
-    String categoryNumber = jsonData['featured'][i]['category'];
-    int itemNumber = jsonData['featured'][i]['itemNo'];
-    featured
-        .add(Map<String, dynamic>.from(jsonData[categoryNumber][itemNumber]));
-    print(categoryNumber);
-    print(itemNumber);
+
+  final List<Map<String, dynamic>> featured = [];
+  if (jsonData['featured'] is List && (jsonData['featured'] as List).isNotEmpty) {
+    // normalize featured[0] description key if present
+    final firstRaw = Map<String, dynamic>.from(jsonData['featured'][0]);
+    if (firstRaw.containsKey('collectiondescription')) {
+      firstRaw['description'] = firstRaw['collectiondescription'];
+    }
+    featured.add(firstRaw);
+  }
+
+  for (int i = 1; i < (jsonData['featured'] as List).length; i++) {
+    final entry = jsonData['featured'][i];
+    if (entry is Map) {
+      final String? categoryKey = entry['category']?.toString();
+      final dynamic itemNoRaw = entry['itemNo'];
+      final int? itemIndex = (itemNoRaw is int) ? itemNoRaw : int.tryParse('$itemNoRaw');
+
+      if (categoryKey != null &&
+          itemIndex != null &&
+          jsonData[categoryKey] is List &&
+          itemIndex >= 0 &&
+          itemIndex < (jsonData[categoryKey] as List).length) {
+        final item = Map<String, dynamic>.from(jsonData[categoryKey][itemIndex]);
+        // normalize collectiondescription on referenced item as well
+        if (item.containsKey('collectiondescription')) {
+          item['description'] = item['collectiondescription'];
+        }
+        featured.add(item);
+      }
+    }
   }
   return featured;
 }
+
 
 List<Widget> buildCollectionCards(List<Map<String, dynamic>> collections) {
   return collections.map((collection) {
@@ -67,6 +103,7 @@ List<Widget> buildProductCards(List<Map<String, dynamic>> collections,
 }
 
 //this function should be able to be used to build both the collections "e.g. like good friday sales" and also the categories within products "e.g. hoodies, t-shirts etc"
+// ...existing code...
 FutureBuilder<List<Map<String, dynamic>>> buildCollectionsFutureBuilder(
     Future<List<Map<String, dynamic>>> future,
     BuildContext context,
@@ -81,20 +118,50 @@ FutureBuilder<List<Map<String, dynamic>>> buildCollectionsFutureBuilder(
         return Center(child: Text('Error: ${snapshot.error}'));
       }
       final collections = snapshot.data ?? [];
-      return GridView.count(
-        shrinkWrap: true, // allow GridView inside a scrollable parent
-        physics:
-            const NeverScrollableScrollPhysics(), // let outer scroll view handle scrolling
-        crossAxisCount: MediaQuery.of(context).size.width > 600 ? 2 : 1,
-        crossAxisSpacing: 24,
-        mainAxisSpacing: 48,
+      if (collections.isEmpty) {
+        return const Center(child: Text('No items found'));
+      }
+
+      // If first item is a description object, render it separately and exclude it from the grid.
+      String? description;
+      List<Map<String, dynamic>> remaining;
+      final first = collections.first;
+      if (first.containsKey('collectiondescription')) {
+        description = first['description']?.toString();
+        remaining = collections.length > 1 ? collections.sublist(1) : <Map<String, dynamic>>[];
+      } else {
+        remaining = collections;
+      }
+
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          ...buildCollectionCards(collections),
+          if (description != null) ...[
+            Padding(
+              padding: const EdgeInsets.only(bottom: 12.0),
+              child: Text(
+                description,
+                style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+          GridView.count(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            crossAxisCount: MediaQuery.of(context).size.width > 600 ? 2 : 1,
+            crossAxisSpacing: 24,
+            mainAxisSpacing: 48,
+            children: [
+              ...buildCollectionCards(remaining),
+            ],
+          ),
         ],
       );
+      
     },
   );
 }
+
 
 class PageMaster extends StatefulWidget {
   final Widget Function(String sortBy) childBuilder;

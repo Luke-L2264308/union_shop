@@ -45,10 +45,11 @@ class AutumnKnitScarfPage extends StatelessWidget {
           );
         }
         final raw = snapshot.data ?? <dynamic>[];
-        // convert to typed list of maps
         final List<Map<String, dynamic>> itemsList = raw
             .whereType<Map<String, dynamic>>()
             .map((m) => Map<String, dynamic>.from(m))
+            .where((m) =>
+                !(m.containsKey('collectiondescription')))
             .toList();
 
         final query = itemName.toLowerCase().trim();

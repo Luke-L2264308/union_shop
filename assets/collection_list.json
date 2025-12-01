@@ -32,7 +32,7 @@
         }
     ],
     "Autumn Favourites":  [
-        
+        {"collectiondescription": "Cozy up with our handpicked autumn favourites."},
         {
             "title": "Autumn Knit Scarf",
             "price": "£29.99",
@@ -75,6 +75,7 @@
         }
     ],
     "Black Friday": [
+        {"collectiondescription": "Don't miss out on our biggest Black Friday deals."},
         {
             "title": "Noise Cancelling Headphones",
             "price": "£199.99",
@@ -112,6 +113,7 @@
         }
     ],
     "Clothing": [
+        {"collectiondescription": "Explore our latest clothing collections."},
         {
             "title": "Classic Logo T Shirt",
             "price": "£18.00",
@@ -149,6 +151,7 @@
         }
     ],
     "Graduation": [
+        {"collectiondescription": "Celebrate your achievements with our graduation collection."},
         {
             "title": "Graduation Gown",
             "price": "£89.99",
@@ -186,6 +189,7 @@
         }
     ],
     "Merchandise": [
+        {"collectiondescription": "Check out our exclusive merchandise."},
         {
             "title": "Logo Mug",
             "price": "£9.99",
@@ -223,6 +227,7 @@
         }
     ],
     "Personalisation": [
+        {"collectiondescription": "Add a personal touch with our customisation options."},
         {
             "title": "Custom Name Hoodie",
             "price": "£39.99",
@@ -261,6 +266,7 @@
     ],
 
     "featured": [
+        {"collectiondescription": "Explore our handpicked collections, featuring seasonal favourites, exclusive deals, and personalised items to suit every style."},
         {
             "itemNo": 1,
             "category": "Autumn Favourites"
