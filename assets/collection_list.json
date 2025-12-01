@@ -258,5 +258,22 @@
             "routeName": "/collection/personalisation/custom-phone-case",
             "description": "A phone case that can be customised with your choice of design or text.", "sizes": [], "colours": []
         }
+    ],
+
+    "featured": [
+        {
+            "itemNo": 1,
+            "category": "Autumn Favourites"
+        },
+        {
+            "itemNo":3,
+            "category": "Black Friday"
+        },
+        {
+            "itemNo":2,
+            "category": "Clothing"
+        }
     ]
+
+    
 }
