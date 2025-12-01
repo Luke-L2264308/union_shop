@@ -94,7 +94,20 @@ class _CartPageState extends State<CartPage> {
                             : null,
                       ),
                       Text('$quantityInt'),
-                      
+                      IconButton(
+                        icon: const Icon(Icons.add),
+                        tooltip: 'Add one',
+                        onPressed: () async {
+                          await increaseCartItemQuantity(
+                            title: title,
+                            size: size,
+                            colour: colour,
+                            count: 1,
+                          );
+                          if (!mounted) return;
+                          setState(() => _loadCart());
+                        },
+                      ),
                       IconButton(
                         icon: const Icon(Icons.delete),
                         tooltip: 'Remove all',
