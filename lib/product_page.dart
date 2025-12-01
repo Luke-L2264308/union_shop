@@ -101,7 +101,6 @@ class _ProductPageState extends State<ProductPage> {
         } catch (e) {
           // If anything goes wrong with merging, fall back to appending the item
           await appendCartItem(item);
-          
         }
       } catch (e, st) {
         // Log failure but don't crash the UI
@@ -127,7 +126,15 @@ class _ProductPageState extends State<ProductPage> {
     final String price = data[0]["price"];
     final List<dynamic> sizes = data[0]["sizes"];
     final List<dynamic> colours = data[0]["colours"];
-
+    final hasReduced =
+        data[0].containsKey("reducedprice") && data[0]["reducedprice"] != null;
+    String? reduced;
+    if (hasReduced) {
+      reduced = data[0]["reducedprice"] as String;
+      // show reduced
+    } else {
+      reduced = null;
+    }
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -195,13 +202,30 @@ class _ProductPageState extends State<ProductPage> {
                     const SizedBox(height: 12),
 
                     // Product price
-                    Text(
-                      price,
-                      style: const TextStyle(
+                    Row(
+                      children: [
+                      Text(
+                        price,
+                        style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF4d2963),
+                        color: const Color(0xFF4d2963),
+                        decoration: hasReduced ? TextDecoration.lineThrough : TextDecoration.none,
+                        ),
                       ),
+                        if (hasReduced) ...[
+                          const SizedBox(width: 12),
+                          Text(
+                            reduced!,
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red,
+                              decoration: TextDecoration.none,
+                            ),
+                          ),
+                        ],
+                      ],
                     ),
 
                     const SizedBox(height: 24),

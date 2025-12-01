@@ -35,7 +35,7 @@
         {"collectiondescription": "Cozy up with our handpicked autumn favourites."},
         {
             "title": "Autumn Knit Scarf",
-            "price": "£29.99",
+            "price": "£29.99", "reducedprice": "£24.99",
             "imageLocation": "assets/images/autumn-favourites/autumn-knit-scarf.png",
             "routeName": "/collection/autumn-favourites/autumn-knit-scarf", 
             "description": "Cozy up with our autumn knit scarf, perfect for chilly days.", "sizes": [],
@@ -43,7 +43,7 @@
         },
         {
             "title": "Leaf Print Sweater",
-            "price": "£49.50",
+            "price": "£49.50", 
             "imageLocation": "assets/images/autumn-favourites/leaf-print-sweater.png",
             "routeName": "/collection/autumn-favourites/leaf-print-sweater",
             "description": "Stay warm and stylish with our leaf print sweater, a perfect autumn essential.",
@@ -59,7 +59,7 @@
         },
         {
             "title": "Amber Scent Candle",
-            "price": "£15.00",
+            "price": "£15.00", 
             "imageLocation": "assets/images/autumn-favourites/amber-scent-candle.png",
             "routeName": "/collection/autumn-favourites/amber-scent-candle",
             "description": "Fill your space with the warm and inviting aroma of our amber scent candle.", "sizes": [],
@@ -78,35 +78,35 @@
         {"collectiondescription": "Don't miss out on our biggest Black Friday deals."},
         {
             "title": "Noise Cancelling Headphones",
-            "price": "£199.99",
+            "price": "£199.99", "reducedprice": "£149.99",
             "imageLocation": "assets/images/black-friday/noise-cancelling-headphones.png",
             "routeName": "/collection/black-friday/noise-cancelling-headphones",
             "description": "Experience immersive sound with our noise-cancelling headphones, perfect for focus and relaxation.", "sizes": [], "colours": []
         },
         {
             "title": "4K Smart TV 55\"",
-            "price": "£399.00",
+            "price": "£399.00", "reducedprice": "£349.00",
             "imageLocation": "assets/images/black-friday/4k-smart-tv-55.png",
             "routeName": "/collection/black-friday/4k-smart-tv-55",
             "description": "Enjoy stunning visuals with our 55-inch 4K Smart TV, perfect for your home entertainment.", "sizes": [], "colours": []
         },
         {
             "title": "Gaming Mouse",
-            "price": "£39.99",
+            "price": "£39.99", "reducedprice": "£29.99",
             "imageLocation": "assets/images/black-friday/gaming-mouse.png",
             "routeName": "/collection/black-friday/gaming-mouse",
             "description": "Enhance your gaming experience with our precision gaming mouse.", "sizes": [], "colours": []
         },
         {
             "title": "Leather Wallet",
-            "price": "£24.99",
+            "price": "£24.99", "reducedprice": "£19.99",
             "imageLocation": "assets/images/black-friday/leather-wallet.png",
             "routeName": "/collection/black-friday/leather-wallet",
             "description": "A sleek and durable leather wallet to keep your essentials organized.", "sizes": [], "colours": []
         },
         {
             "title": "Portable Charger 10000mAh",
-            "price": "£19.50",
+            "price": "£19.50", "reducedprice": "£14.99",
             "imageLocation": "assets/images/black-friday/portable-charger-10000mah.png",
             "routeName": "/collection/black-friday/portable-charger-10000mah",
             "description": "Keep your devices powered on the go with our high-capacity portable charger.", "sizes": [], "colours": []
