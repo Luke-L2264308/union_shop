@@ -1,29 +1,24 @@
 import 'dart:convert';
 import 'dart:html' as html;
 
-const _kCartKey = 'union_shop_cart_v1';
+const _cartKey = 'union_shop_cart';
+
+Future<List<Map<String, dynamic>>> readCartItems() async {
+  final raw = html.window.localStorage[_cartKey];
+  if (raw == null || raw.trim().isEmpty) return <Map<String, dynamic>>[];
+  final decoded = jsonDecode(raw);
+  if (decoded is List) return decoded.cast<Map<String, dynamic>>();
+  return <Map<String, dynamic>>[];
+}
+
+Future<void> writeCartItems(List<Map<String, dynamic>> items) async {
+  html.window.localStorage[_cartKey] = const JsonEncoder.withIndent('  ').convert(items);
+}
 
 Future<void> appendCartItem(Map<String, dynamic> item) async {
-  final stored = html.window.localStorage[_kCartKey];
-  List<dynamic> cart = [];
-  if (stored != null && stored.isNotEmpty) {
-    try {
-      final decoded = jsonDecode(stored);
-      if (decoded is List) cart = decoded;
-    } catch (_) {
-      cart = [];
-    }
-  }
-  cart.add(item);
-  html.window.localStorage[_kCartKey] = jsonEncode(cart);
+  final items = await readCartItems();
+  items.add(item);
+  await writeCartItems(items);
 }
 
-Future<List<Map<String, dynamic>>> readCart() async {
-  final stored = html.window.localStorage[_kCartKey];
-  if (stored == null || stored.isEmpty) return [];
-  try {
-    final decoded = jsonDecode(stored);
-    if (decoded is List) return decoded.cast<Map<String, dynamic>>();
-  } catch (_) {}
-  return [];
-}
+Future<List<Map<String, dynamic>>> readCart() => readCartItems();

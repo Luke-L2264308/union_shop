@@ -1,42 +1,38 @@
-import 'dart:io';
 import 'dart:convert';
+import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
-/// Append a cart item to a JSON array file stored in the app documents directory.
-Future<void> appendCartItem(Map<String, dynamic> item) async {
-  final dir = await getApplicationDocumentsDirectory();
-  final file = File('${dir.path}/cart.json');
+// File name used for storing the cart
+const _cartFilename = 'cart.json';
 
-  List<dynamic> cart = [];
-  if (await file.exists()) {
-    final text = await file.readAsString();
-    if (text.trim().isNotEmpty) {
-      try {
-        final decoded = jsonDecode(text);
-        if (decoded is List) cart = decoded;
-      } catch (_) {
-        // ignore: avoid_print
-        print('Failed to decode existing cart — starting fresh');
-        cart = [];
-      }
-    }
+Future<File> _cartFile() async {
+  final dir = await getApplicationDocumentsDirectory();
+  return File('${dir.path}/$_cartFilename');
+}
+
+Future<List<Map<String, dynamic>>> readCartItems() async {
+  final file = await _cartFile();
+  if (!await file.exists()) return <Map<String, dynamic>>[];
+  final contents = await file.readAsString();
+  if (contents.trim().isEmpty) return <Map<String, dynamic>>[];
+  final decoded = jsonDecode(contents);
+  if (decoded is List) {
+    return decoded.cast<Map<String, dynamic>>();
   }
-
-  cart.add(item);
-  await file.writeAsString(jsonEncode(cart), flush: true);
+  return <Map<String, dynamic>>[];
 }
 
-/// Read cart as a list of maps. Returns empty list if missing or invalid.
-Future<List<Map<String, dynamic>>> readCart() async {
-  final dir = await getApplicationDocumentsDirectory();
-  final file = File('${dir.path}/cart.json');
-  if (!await file.exists()) return [];
-  try {
-    final text = await file.readAsString();
-    final decoded = jsonDecode(text);
-    if (decoded is List) {
-      return decoded.cast<Map<String, dynamic>>();
-    }
-  } catch (_) {}
-  return [];
+Future<void> writeCartItems(List<Map<String, dynamic>> items) async {
+  final file = await _cartFile();
+  final encoded = const JsonEncoder.withIndent('  ').convert(items);
+  await file.writeAsString(encoded);
 }
+
+Future<void> appendCartItem(Map<String, dynamic> item) async {
+  final items = await readCartItems();
+  items.add(item);
+  await writeCartItems(items);
+}
+
+// Convenience used by CartPage
+Future<List<Map<String, dynamic>>> readCart() => readCartItems();

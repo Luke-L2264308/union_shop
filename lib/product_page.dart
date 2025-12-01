@@ -17,7 +17,7 @@ class _ProductPageState extends State<ProductPage> {
   List<Map<String, dynamic>> get data => widget.data;
   String? _colourSelected;
   String? _sizeSelected;
-  
+
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
@@ -69,7 +69,40 @@ class _ProductPageState extends State<ProductPage> {
           'addedAt': DateTime.now().toIso8601String(),
         };
 
-        await appendCartItem(item);
+        // Try to merge with existing cart entry (match on title + size + colour).
+        // Requires helper functions in cart_storage.dart:
+        //   Future<List<Map<String,dynamic>>> readCartItems()
+        //   Future<void> writeCartItems(List<Map<String,dynamic>> items)
+        //
+        // If those helpers don't exist, add them to cart_storage.dart (read/write a JSON
+        // list or newline-delimited JSON). If you prefer, move merging logic into cart_storage.dart.
+        try {
+          List<Map<String, dynamic>> existing = [];
+          try {
+            existing = await readCartItems();
+          } catch (_) {
+            existing = [];
+          }
+
+          final matchIndex = existing.indexWhere((e) =>
+              (e['title'] ?? '') == title &&
+              (e['size'] ?? '') == (size ?? '') &&
+              (e['colour'] ?? '') == (colour ?? ''));
+
+          if (matchIndex != -1) {
+            // Merge quantities and update timestamp
+            existing[matchIndex]['quantity'] =
+                (existing[matchIndex]['quantity'] ?? 0) + _quantity;
+            existing[matchIndex]['addedAt'] = DateTime.now().toIso8601String();
+            await writeCartItems(existing);
+          } else {
+            await appendCartItem(item);
+          }
+        } catch (e) {
+          // If anything goes wrong with merging, fall back to appending the item
+          await appendCartItem(item);
+          
+        }
       } catch (e, st) {
         // Log failure but don't crash the UI
         // ignore: avoid_print
@@ -77,6 +110,7 @@ class _ProductPageState extends State<ProductPage> {
       }
     }();
   }
+
   @override
   void initState() {
     super.initState();
