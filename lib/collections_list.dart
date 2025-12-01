@@ -97,6 +97,7 @@ List<Widget> buildProductCards(List<Map<String, dynamic>> collections,
       title: collection['title'],
       price: collection['price'],
       imageUrl: '${collection['imageLocation']}',
+      reducedprice: collection['reducedprice']?.toString(),
       routeName: '${collection['routeName']}',
     );
   }).toList();

@@ -31,10 +31,12 @@ class Card extends StatelessWidget {
 
 class ProductCard extends Card {
   final String price;
+  final String? reducedprice;
   const ProductCard({
     super.key,
     required super.title,
     required this.price,
+    this.reducedprice,
     required super.imageUrl,
     required super.routeName,
   });
@@ -57,11 +59,35 @@ class ProductCard extends Card {
             maxLines: 2,
           ),
           const SizedBox(height: 4),
+          if (reducedprice != null)
+            Row(
+              children: [
           Text(
             price,
-            style: const TextStyle(fontSize: 13, color: Colors.grey),
+            style: const TextStyle(
+              fontSize: 13,
+              color: Colors.grey,
+              decoration: TextDecoration.lineThrough,
+            ),
           ),
+          const SizedBox(width: 8),
+          Text(
+            reducedprice!,
+            style: const TextStyle(
+              fontSize: 13,
+              color: Colors.red,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+              ],
+            )
+          else
+            Text(
+              price,
+              style: const TextStyle(fontSize: 13, color: Colors.grey),
+            ),
         ],
+        
       ),
     );
   }
