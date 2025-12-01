@@ -36,3 +36,43 @@ Future<void> appendCartItem(Map<String, dynamic> item) async {
 
 // Convenience used by CartPage
 Future<List<Map<String, dynamic>>> readCart() => readCartItems();
+
+// Decrease quantity by `count`; if resulting quantity <= 0, remove the item.
+Future<void> decreaseCartItemQuantity({
+  required String title,
+  required String size,
+  required String colour,
+  required int count,
+}) async {
+  final items = await readCartItems();
+  final idx = items.indexWhere((e) =>
+      (e['title'] ?? '') == title &&
+      (e['size'] ?? '') == size &&
+      (e['colour'] ?? '') == colour);
+  if (idx == -1) return;
+  final current = (items[idx]['quantity'] is int)
+      ? items[idx]['quantity'] as int
+      : int.tryParse('${items[idx]['quantity']}') ?? 0;
+  final newQty = current - count;
+  if (newQty > 0) {
+    items[idx]['quantity'] = newQty;
+    items[idx]['addedAt'] = DateTime.now().toIso8601String();
+  } else {
+    items.removeAt(idx);
+  }
+  await writeCartItems(items);
+}
+
+// Remove the cart entry completely
+Future<void> removeCartItem({
+  required String title,
+  required String size,
+  required String colour,
+}) async {
+  final items = await readCartItems();
+  items.removeWhere((e) =>
+      (e['title'] ?? '') == title &&
+      (e['size'] ?? '') == size &&
+      (e['colour'] ?? '') == colour);
+  await writeCartItems(items);
+}
