@@ -14,7 +14,6 @@ class Card extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Image.asset(
       imageUrl,
       fit: BoxFit.cover,
@@ -47,7 +46,6 @@ class ProductCard extends Card {
 
     return GestureDetector(
       onTap: () => Navigator.pushNamed(context, routeName),
-
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
