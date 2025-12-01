@@ -12,6 +12,22 @@ Future<List<Map<String, dynamic>>> loadCollections(String category) async {
   return List<Map<String, dynamic>>.from(jsonData[category]);
 }
 
+Future<List<Map<String, dynamic>>> loadFeatured() async {
+  final String jsonString =
+      await rootBundle.loadString('assets/collection_list.json');
+  final Map<String, dynamic> jsonData = json.decode(jsonString);
+  List<Map<String, dynamic>> featured = [];
+  for (int i = 0; i < jsonData['featured'].length; i++) {
+    String categoryNumber = jsonData['featured'][i]['category'];
+    int itemNumber = jsonData['featured'][i]['itemNo'];
+    featured
+        .add(Map<String, dynamic>.from(jsonData[categoryNumber][itemNumber]));
+    print(categoryNumber);
+    print(itemNumber);
+  }
+  return featured;
+}
+
 List<Widget> buildCollectionCards(List<Map<String, dynamic>> collections) {
   return collections.map((collection) {
     return CollectionCard(
@@ -157,7 +173,6 @@ class _PageMasterState extends State<PageMaster> {
     );
   }
 }
-// ...existing code...
 
 class Collections extends StatelessWidget {
   const Collections({super.key});
@@ -200,6 +215,22 @@ class BlackFridayPage extends StatelessWidget {
       body: PageMaster(
         childBuilder: (sortBy) => buildCollectionsFutureBuilder(
           loadCollections('Black Friday'),
+          context,
+          (list) => buildProductCards(list, sortBy: sortBy),
+        ),
+      ),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: PageMaster(
+        childBuilder: (sortBy) => buildCollectionsFutureBuilder(
+          loadFeatured(),
           context,
           (list) => buildProductCards(list, sortBy: sortBy),
         ),
