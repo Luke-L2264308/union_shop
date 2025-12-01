@@ -59,3 +59,22 @@ Future<void> removeCartItem({
       (e['colour'] ?? '') == colour);
   await writeCartItems(items);
 }
+
+Future<void> increaseCartItemQuantity({
+  required String title,
+  required String size,
+  required String colour,
+  required int count,
+}) async {
+  final items = await readCartItems();
+  final idx = items.indexWhere((e) =>
+      (e['title'] ?? '') == title &&
+      (e['size'] ?? '') == size &&
+      (e['colour'] ?? '') == colour);
+
+  final current = int.tryParse('${items[idx]['quantity']}') ?? 0;
+  items[idx]['quantity'] = current + count;
+  items[idx]['addedAt'] = DateTime.now().toIso8601String();
+
+  await writeCartItems(items);
+}
