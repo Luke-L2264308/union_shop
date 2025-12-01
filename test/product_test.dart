@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:union_shop/main.dart';
 import 'package:union_shop/product_page.dart';
-
+import 'package:union_shop/collections_list.dart';
 void main() {
   group('Product Page Tests', () {
     Widget createTestWidget() {

@@ -99,9 +99,9 @@ FutureBuilder<List<Map<String, dynamic>>> buildCollectionsFutureBuilder(
 class PageMaster extends StatefulWidget {
   final Widget Function(String sortBy) childBuilder;
   final bool showFilters;
+  final Widget? extraContent;
   const PageMaster(
-      {super.key, required this.childBuilder, this.showFilters = true});
-
+      {super.key, required this.childBuilder, this.showFilters = true, this.extraContent});
   @override
   State<PageMaster> createState() => _PageMasterState();
 }
@@ -141,6 +141,7 @@ class _PageMasterState extends State<PageMaster> {
                   Column(
                     children: [
                       const Header(),
+                      if (widget.extraContent != null) widget.extraContent!,
                       if (widget.showFilters) ...[
                         const Text('filters'),
                         DropdownMenu<String>(
@@ -229,6 +230,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageMaster(
+        showFilters: false,
         childBuilder: (sortBy) => buildCollectionsFutureBuilder(
           loadFeatured(),
           context,
