@@ -46,4 +46,21 @@ void main() {
     expect(read.first['title'], 'T-Shirt');
     expect(read.first['quantity'], 2);
   });
+  test('appendCartItem adds an item to existing list', () async {
+    final initial = [
+      {'title': 'Socks', 'size': 'L', 'colour': 'Black', 'quantity': 1}
+    ];
+    await writeCartItems(initial);
+    await appendCartItem({
+      'title': 'Hat',
+      'size': 'One',
+      'colour': 'Blue',
+      'quantity': 1,
+    });
+    final read = await readCartItems();
+    expect(read.map((e) => e['title']), containsAll(['Socks', 'Hat']));
+    expect(read, hasLength(2));
+  });
+
+  
 }
