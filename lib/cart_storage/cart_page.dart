@@ -1,8 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/cart_storage/cart_storage.dart';
 
+// Testable function types
+typedef CartReadFn = Future<List<Map<String, dynamic>>> Function();
+typedef CartChangeQuantityFn = Future<void> Function({
+  required String title,
+  required String size,
+  required String colour,
+  required int count,
+});
+typedef CartRemoveFn = Future<void> Function({
+  required String title,
+  required String size,
+  required String colour,
+});
+
 class CartPage extends StatefulWidget {
-  const CartPage({super.key});
+  /// Optional hooks for testing: if provided these will be used instead of
+  /// the real storage functions.
+  const CartPage({
+    super.key,
+    this.readCartFn,
+    this.decreaseFn,
+    this.increaseFn,
+    this.removeFn,
+  });
+
+  final CartReadFn? readCartFn;
+  final CartChangeQuantityFn? decreaseFn;
+  final CartChangeQuantityFn? increaseFn;
+  final CartRemoveFn? removeFn;
 
   @override
   State<CartPage> createState() => _CartPageState();
@@ -18,7 +45,7 @@ class _CartPageState extends State<CartPage> {
   }
 
   void _loadCart() {
-    _futureCart = readCart();
+    _futureCart = widget.readCartFn?.call() ?? readCart();
   }
 
   Future<void> _refresh() async {
@@ -82,12 +109,17 @@ class _CartPageState extends State<CartPage> {
                         tooltip: 'Remove one',
                         onPressed: quantityInt > 0
                             ? () async {
-                                await decreaseCartItemQuantity(
-                                  title: title,
-                                  size: size,
-                                  colour: colour,
-                                  count: 1,
-                                );
+                                await (widget.decreaseFn?.call(
+                                      title: title,
+                                      size: size,
+                                      colour: colour,
+                                      count: 1,
+                                    ) ??
+                                    decreaseCartItemQuantity(
+                                        title: title,
+                                        size: size,
+                                        colour: colour,
+                                        count: 1));
                                 if (!mounted) return;
                                 setState(() => _loadCart());
                               }
@@ -98,12 +130,17 @@ class _CartPageState extends State<CartPage> {
                         icon: const Icon(Icons.add),
                         tooltip: 'Add one',
                         onPressed: () async {
-                          await increaseCartItemQuantity(
-                            title: title,
-                            size: size,
-                            colour: colour,
-                            count: 1,
-                          );
+                          await (widget.increaseFn?.call(
+                                title: title,
+                                size: size,
+                                colour: colour,
+                                count: 1,
+                              ) ??
+                              increaseCartItemQuantity(
+                                  title: title,
+                                  size: size,
+                                  colour: colour,
+                                  count: 1));
                           if (!mounted) return;
                           setState(() => _loadCart());
                         },
@@ -131,8 +168,10 @@ class _CartPageState extends State<CartPage> {
                             ),
                           );
                           if (confirmed == true) {
-                            await removeCartItem(
-                                title: title, size: size, colour: colour);
+                            await (widget.removeFn?.call(
+                                    title: title, size: size, colour: colour) ??
+                                removeCartItem(
+                                    title: title, size: size, colour: colour));
                             if (!mounted) return;
                             setState(() => _loadCart());
                           }
