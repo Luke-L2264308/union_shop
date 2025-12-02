@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/cart_storage/cart_page.dart';
-import 'package:union_shop/footer.dart';
-import 'package:union_shop/header.dart';
+import 'package:union_shop/cart_storage/headerandfooter/footer.dart';
+import 'package:union_shop/cart_storage/headerandfooter/header.dart';
 import 'package:union_shop/product_page.dart';
 import 'package:union_shop/aboutus_page.dart';
 import 'card_classes.dart';

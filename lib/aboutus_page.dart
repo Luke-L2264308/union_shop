@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/footer.dart';
-import 'package:union_shop/header.dart';
+import 'package:union_shop/cart_storage/headerandfooter/footer.dart';
+import 'package:union_shop/cart_storage/headerandfooter/header.dart';
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({super.key});
