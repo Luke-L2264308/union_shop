@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'card_classes.dart';
-import 'cart_storage/headerandfooter/header.dart';
-import 'package:union_shop/cart_storage/headerandfooter/footer.dart';
+import 'headerandfooter/header.dart';
+import 'package:union_shop/headerandfooter/footer.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 

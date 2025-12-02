@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/cart_storage/headerandfooter/footer.dart';
-import 'package:union_shop/cart_storage/headerandfooter/header.dart';
+import 'package:union_shop/headerandfooter/footer.dart';
+import 'package:union_shop/headerandfooter/header.dart';
 
 import 'dart:convert';
 import 'package:union_shop/cart_storage/cart_storage.dart';
