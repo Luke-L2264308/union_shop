@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:union_shop/headerandfooter/footer.dart';
 import 'package:union_shop/main.dart';
 import 'package:union_shop/productpagetemplates/product_page.dart';
 import 'package:union_shop/productpagetemplates/collections_list.dart';
@@ -26,11 +27,7 @@ void main() {
       await tester.pump();
 
       // Check that footer is present
-      expect(find.text('Placeholder Footer'), findsOneWidget);
-      expect(
-        find.text('Students should customise this footer section'),
-        findsOneWidget,
-      );
+      expect(find.byType(Footer), findsOneWidget);
     });
   });
 }
