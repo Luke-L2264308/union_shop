@@ -132,6 +132,14 @@ void main() {
     expect(DateTime.tryParse(read.first['addedAt'] ?? ''), isNotNull);
   });
 
-  
+  test('readCart is an alias for readCartItems', () async {
+    final items = [
+      {'title': 'Cap', 'size': 'S', 'colour': 'Yellow', 'quantity': 1}
+    ];
+    await writeCartItems(items);
+    final a = await readCartItems();
+    final b = await readCart();
+    expect(b, equals(a));
+  });
   
 }
