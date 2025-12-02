@@ -3,11 +3,11 @@ import 'package:union_shop/cart_storage/cart_page.dart';
 import 'package:union_shop/headerandfooter/footer.dart';
 import 'package:union_shop/headerandfooter/header.dart';
 import 'package:union_shop/product_page.dart';
-import 'package:union_shop/aboutus_page.dart';
+import 'package:union_shop/pageswithoutproducts/aboutus_page.dart';
 import 'card_classes.dart';
 import 'collections_list.dart';
 import 'item_pages.dart';
-import 'signin.dart';
+import 'pageswithoutproducts/signin.dart';
 void main() {
   runApp(const UnionShopApp());
 }
