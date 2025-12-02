@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 // import a single symbol (function, class, const, etc.) from another file
-import 'package:union_shop/collections_list.dart' show loadCollections;
-import 'package:union_shop/product_page.dart';
+import 'package:union_shop/productpagetemplates/collections_list.dart' show loadCollections;
+import 'package:union_shop/productpagetemplates/product_page.dart';
 
 class AutumnKnitScarfPage extends StatelessWidget {
   const AutumnKnitScarfPage({super.key, required this.routeName});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/item_pages.dart';
+import 'package:union_shop/helpers/item_pages.dart';
 
 class Card extends StatelessWidget {
   final String title;
