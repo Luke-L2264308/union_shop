@@ -37,5 +37,18 @@ void main() {
     expect(find.text('Password must be at least 6 characters'), findsOneWidget);
   });
 
-  
+  testWidgets('shows success snackbar for valid credentials', (WidgetTester tester) async {
+    await tester.pumpWidget(makeTestableWidget());
+
+    // Enter valid email and password
+    await tester.enterText(find.bySemanticsLabel('Email'), 'user@example.com');
+    await tester.enterText(find.bySemanticsLabel('Password'), 'securePassword');
+
+    // Tap sign in
+    await tester.tap(find.widgetWithText(ElevatedButton, 'Sign In'));
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+
+    expect(find.text('Sign-in successful!'), findsOneWidget);
+  });
 }
