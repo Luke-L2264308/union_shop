@@ -2,33 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:union_shop/headerandfooter/header.dart';
 import 'package:union_shop/headerandfooter/footer.dart';
-import 'package:union_shop/main.dart' as app;
+import 'package:union_shop/productpagetemplates/collections_list.dart';
 
 void main() {
-  testWidgets('Home page builds and contains a Scaffold',
-      (WidgetTester tester) async {
-    // Launch the app's main entrypoint; it should call runApp(...)
-    app.main();
-    await tester.pumpAndSettle();
+  testWidgets('Home page builds and contains a Scaffold', (WidgetTester tester) async {
+  // Build HomeScreen directly rather than calling app.main()
+  await tester.pumpWidget(const MaterialApp(home: HomeScreen()));
+  await tester.pump();
 
-    // Verify that the home page has a Scaffold (typical for material apps)
-    expect(find.byType(Scaffold), findsOneWidget);
-  });
-  testWidgets('Home page contains a header', (WidgetTester tester) async {
-    // Launch the app
-    app.main();
-    await tester.pumpAndSettle();
+  expect(find.byType(Scaffold), findsOneWidget);
+  
+});
 
-    // Verify that there is an AppBar on the home page
-    expect(find.byType(Header), findsOneWidget);
-  });
+testWidgets('Home page contains a header', (WidgetTester tester) async {
+  await tester.pumpWidget(const MaterialApp(home: HomeScreen()));
+  await tester.pump();
 
-  testWidgets('Home page contains a footer', (WidgetTester tester) async {
-    // Launch the app
-    app.main();
-    await tester.pumpAndSettle();
+  expect(find.byType(Header), findsOneWidget);
+});
 
-    // Verify that there is a Footer on the home page
-    expect(find.byType(Footer), findsOneWidget);
-  });
+testWidgets('Home page contains a footer', (WidgetTester tester) async {
+  await tester.pumpWidget(const MaterialApp(home: HomeScreen()));
+  await tester.pump();
+
+  expect(find.byType(Footer), findsOneWidget);
+});
 }
