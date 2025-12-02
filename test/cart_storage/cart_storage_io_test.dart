@@ -108,5 +108,30 @@ void main() {
     expect(read.first['colour'], 'Black');
   });
 
+  test('increaseCartItemQuantity increases quantity for existing item',
+      () async {
+    final item = {
+      'title': 'Shoes',
+      'size': '42',
+      'colour': 'White',
+      'quantity': 2,
+      'addedAt': DateTime.utc(2020).toIso8601String(),
+    };
+    await writeCartItems([item]);
+
+    await increaseCartItemQuantity(
+      title: 'Shoes',
+      size: '42',
+      colour: 'White',
+      count: 3,
+    );
+
+    final read = await readCartItems();
+    expect(read, hasLength(1));
+    expect(read.first['quantity'], 5);
+    expect(DateTime.tryParse(read.first['addedAt'] ?? ''), isNotNull);
+  });
+
+  
   
 }
