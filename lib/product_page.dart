@@ -3,7 +3,7 @@ import 'package:union_shop/footer.dart';
 import 'package:union_shop/header.dart';
 
 import 'dart:convert';
-import 'package:union_shop/cart_storage.dart';
+import 'package:union_shop/cart_storage/cart_storage.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key, required this.data});
