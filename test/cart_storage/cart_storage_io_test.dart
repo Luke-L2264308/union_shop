@@ -62,5 +62,51 @@ void main() {
     expect(read, hasLength(2));
   });
 
+  test('decreaseCartItemQuantity decreases quantity and removes when <= 0',
+      () async {
+    final item = {
+      'title': 'Jacket',
+      'size': 'XL',
+      'colour': 'Green',
+      'quantity': 3,
+      'addedAt': DateTime.utc(2020).toIso8601String(),
+    };
+    await writeCartItems([item]);
+
+    // decrease by 1 => quantity becomes 2
+    await decreaseCartItemQuantity(
+      title: 'Jacket',
+      size: 'XL',
+      colour: 'Green',
+      count: 1,
+    );
+    var read = await readCartItems();
+    expect(read, hasLength(1));
+    expect(read.first['quantity'], 2);
+    expect(DateTime.tryParse(read.first['addedAt'] ?? ''), isNotNull);
+
+    // decrease by 2 => item removed
+    await decreaseCartItemQuantity(
+      title: 'Jacket',
+      size: 'XL',
+      colour: 'Green',
+      count: 2,
+    );
+    read = await readCartItems();
+    expect(read, isEmpty);
+  });
+
+  test('removeCartItem removes the matching entry', () async {
+    final items = [
+      {'title': 'Bag', 'size': 'One', 'colour': 'Brown', 'quantity': 1},
+      {'title': 'Bag', 'size': 'One', 'colour': 'Black', 'quantity': 1},
+    ];
+    await writeCartItems(items);
+    await removeCartItem(title: 'Bag', size: 'One', colour: 'Brown');
+    final read = await readCartItems();
+    expect(read, hasLength(1));
+    expect(read.first['colour'], 'Black');
+  });
+
   
 }
