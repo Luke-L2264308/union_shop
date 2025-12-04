@@ -91,7 +91,7 @@ void main() {
 
     expect(find.text('Product Page'), findsOneWidget);
   });
-testWidgets('Clicking About Us navigates to /aboutus',
+  testWidgets('Clicking About Us navigates to /aboutus',
       (WidgetTester tester) async {
     await tester.pumpWidget(MaterialApp(
       initialRoute: '/start',
@@ -112,7 +112,7 @@ testWidgets('Clicking About Us navigates to /aboutus',
 
     expect(find.text('About Us Page'), findsOneWidget);
   });
-testWidgets(
+  testWidgets(
       'Clicking Home navigates to / (root) with pushNamedAndRemoveUntil',
       (WidgetTester tester) async {
     await tester.pumpWidget(MaterialApp(
@@ -156,7 +156,25 @@ testWidgets(
     expect(find.text('Sign In Page'), findsOneWidget);
   });
 
-  
-  
-}
+  testWidgets('Clicking Cart icon navigates to /cart',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      initialRoute: '/start',
+      routes: {
+        '/start': (ctx) => MediaQuery(
+              data: const MediaQueryData(size: Size(1200, 800)),
+              child: const Scaffold(body: Header()),
+            ),
+        '/cart': (ctx) =>
+            const Scaffold(body: Center(child: Text('Cart Page'))),
+      },
+    ));
+    await tester.pumpAndSettle();
 
+    expect(find.byIcon(Icons.shopping_bag_outlined), findsOneWidget);
+    await tester.tap(find.byIcon(Icons.shopping_bag_outlined));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Cart Page'), findsOneWidget);
+  });
+}
