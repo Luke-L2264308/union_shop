@@ -134,6 +134,28 @@ testWidgets(
     expect(find.text('Home Page'), findsOneWidget);
   });
 
+  testWidgets('Clicking Sign In icon navigates to /signin',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      initialRoute: '/start',
+      routes: {
+        '/start': (ctx) => MediaQuery(
+              data: const MediaQueryData(size: Size(1200, 800)),
+              child: const Scaffold(body: Header()),
+            ),
+        '/signin': (ctx) =>
+            const Scaffold(body: Center(child: Text('Sign In Page'))),
+      },
+    ));
+    await tester.pumpAndSettle();
+
+    expect(find.byIcon(Icons.person_outline), findsOneWidget);
+    await tester.tap(find.byIcon(Icons.person_outline));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Sign In Page'), findsOneWidget);
+  });
+
   
   
 }
