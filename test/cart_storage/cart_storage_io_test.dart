@@ -13,7 +13,10 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     tempDir = await Directory.systemTemp.createTemp('cart_storage_test_');
 
-    channel.setMockMethodCallHandler((call) async {
+    TestDefaultBinaryMessengerBinding
+        .instance
+        .defaultBinaryMessenger
+        .setMockMethodCallHandler(channel, (call) async {
       if (call.method == 'getApplicationDocumentsDirectory') {
         return tempDir.path;
       }
@@ -22,7 +25,10 @@ void main() {
   });
 
   tearDown(() async {
-    channel.setMockMethodCallHandler(null);
+    TestDefaultBinaryMessengerBinding
+      .instance
+      .defaultBinaryMessenger
+      .setMockMethodCallHandler(channel, null);
     if (await tempDir.exists()) {
       await tempDir.delete(recursive: true);
     }

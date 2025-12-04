@@ -22,7 +22,8 @@ void main() {
     tempDir =
         await Directory.systemTemp.createTemp('product_add_to_cart_unit_');
 
-    channel.setMockMethodCallHandler((call) async {
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(channel, (call) async {
       if (call.method == 'getApplicationDocumentsDirectory') {
         return tempDir.path;
       }
@@ -35,7 +36,8 @@ void main() {
   });
 
   tearDown(() async {
-    channel.setMockMethodCallHandler(null);
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(channel, null);
     if (await tempDir.exists()) await tempDir.delete(recursive: true);
   });
 
@@ -69,7 +71,8 @@ void main() {
       }
     });
 
-    List<Map<String, dynamic>>? items = await tester.runAsync(() async => await readCartItems());
+    List<Map<String, dynamic>>? items =
+        await tester.runAsync(() async => await readCartItems());
     expect(items, isNotEmpty);
     expect(items!.first['title'], 'Unit Shirt');
     expect(items.first['quantity'], 1);

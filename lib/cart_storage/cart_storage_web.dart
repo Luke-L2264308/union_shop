@@ -23,7 +23,6 @@ class LocalStorage {}
 extension _LocalStorageExt on LocalStorage {
   external String? getItem(String key);
   external void setItem(String key, String value);
-  external void removeItem(String key);
 }
 
 Future<List<Map<String, dynamic>>> readCartItems() async {
