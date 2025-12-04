@@ -91,4 +91,28 @@ void main() {
 
     expect(find.text('Product Page'), findsOneWidget);
   });
+testWidgets('Clicking About Us navigates to /aboutus',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      initialRoute: '/start',
+      routes: {
+        '/start': (ctx) => MediaQuery(
+              data: const MediaQueryData(size: Size(1200, 800)),
+              child: const Scaffold(body: Header()),
+            ),
+        '/aboutus': (ctx) =>
+            const Scaffold(body: Center(child: Text('About Us Page'))),
+      },
+    ));
+    await tester.pumpAndSettle();
+
+    expect(find.text('About Us'), findsOneWidget);
+    await tester.tap(find.text('About Us'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('About Us Page'), findsOneWidget);
+  });
+
+  
 }
+
