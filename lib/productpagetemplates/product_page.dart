@@ -158,7 +158,7 @@ class _ProductPageState extends State<ProductPage> {
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),
-                        child: Image.network(
+                        child: Image.asset(
                           imageLocation,
                           fit: BoxFit.contain,
                           errorBuilder: (context, error, stackTrace) {
