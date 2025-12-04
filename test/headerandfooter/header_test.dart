@@ -70,4 +70,25 @@ void main() {
     expect(find.text('About Us'), findsOneWidget);
   });
 
+  testWidgets('Clicking Shop navigates to /product',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      initialRoute: '/start',
+      routes: {
+        '/start': (ctx) => MediaQuery(
+              data: const MediaQueryData(size: Size(1200, 800)),
+              child: const Scaffold(body: Header()),
+            ),
+        '/product': (ctx) =>
+            const Scaffold(body: Center(child: Text('Product Page'))),
+      },
+    ));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Shop'), findsOneWidget);
+    await tester.tap(find.text('Shop'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Product Page'), findsOneWidget);
+  });
 }
