@@ -95,9 +95,9 @@ class _ProductPageState extends State<ProductPage> {
           // If anything goes wrong with merging, fall back to appending the item
           await appendCartItem(item);
         }
-      } catch (e, st) {
+      } catch (e) {
         
-        print('Failed to write cart storage: $e\n$st');
+        // ignore errors silently
       }
     }();
   }

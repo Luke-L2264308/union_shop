@@ -1,10 +1,33 @@
 import 'dart:convert';
-import 'dart:html' as html;
+import 'dart:js_interop';
+// import 'package:js/js.dart';
+// import 'package:web/web.dart';
 
 const _cartKey = 'union_shop_cart';
 
+@JS('window')
+external Window? get _window;
+
+@JS()
+@staticInterop
+class Window {}
+
+extension _WindowExt on Window {
+  external LocalStorage? get localStorage;
+}
+
+@JS()
+@staticInterop
+class LocalStorage {}
+
+extension _LocalStorageExt on LocalStorage {
+  external String? getItem(String key);
+  external void setItem(String key, String value);
+  external void removeItem(String key);
+}
+
 Future<List<Map<String, dynamic>>> readCartItems() async {
-  final raw = html.window.localStorage[_cartKey];
+  final raw = _window?.localStorage?.getItem(_cartKey);
   if (raw == null || raw.trim().isEmpty) return <Map<String, dynamic>>[];
   final decoded = jsonDecode(raw);
   if (decoded is List) return decoded.cast<Map<String, dynamic>>();
@@ -12,8 +35,8 @@ Future<List<Map<String, dynamic>>> readCartItems() async {
 }
 
 Future<void> writeCartItems(List<Map<String, dynamic>> items) async {
-  html.window.localStorage[_cartKey] =
-      const JsonEncoder.withIndent('  ').convert(items);
+  final json = const JsonEncoder.withIndent('  ').convert(items);
+  _window?.localStorage?.setItem(_cartKey, json);
 }
 
 Future<void> appendCartItem(Map<String, dynamic> item) async {
@@ -71,6 +94,8 @@ Future<void> increaseCartItemQuantity({
       (e['title'] ?? '') == title &&
       (e['size'] ?? '') == size &&
       (e['colour'] ?? '') == colour);
+
+  if (idx == -1) return;
 
   final current = int.tryParse('${items[idx]['quantity']}') ?? 0;
   items[idx]['quantity'] = current + count;
