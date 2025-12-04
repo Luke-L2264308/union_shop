@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/cart_storage/cart_page.dart';
-import 'package:union_shop/headerandfooter/footer.dart';
-import 'package:union_shop/headerandfooter/header.dart';
-import 'package:union_shop/productpagetemplates/product_page.dart';
+
 import 'package:union_shop/pageswithoutproducts/aboutus_page.dart';
-import 'helpers/card_classes.dart';
 import 'productpagetemplates/collections_list.dart';
 import 'helpers/item_pages.dart';
 import 'pageswithoutproducts/signin.dart';
