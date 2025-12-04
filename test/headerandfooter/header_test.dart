@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:union_shop/cart_storage/cart_storage_io.dart';
 import 'package:union_shop/headerandfooter/header.dart';
@@ -24,4 +23,51 @@ void main() {
       }),
     ));
   });
+  testWidgets('Header shows inline buttons when width > 800',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      home: MediaQuery(
+        data: const MediaQueryData(size: Size(1200, 800)),
+        child: const Scaffold(body: Header()),
+      ),
+    ));
+    await tester.pumpAndSettle();
+
+    // Expect the 5 header TextButtons to be present inline
+    expect(find.byType(TextButton), findsNWidgets(5));
+    expect(find.byType(PopupMenuButton), findsNothing);
+
+    // Labels should be visible as Text widgets
+    expect(find.text('Home'), findsOneWidget);
+    expect(find.text('Shop'), findsOneWidget);
+    expect(find.text('The Print Shack'), findsOneWidget);
+    expect(find.text('SALE!'), findsOneWidget);
+    expect(find.text('About Us'), findsOneWidget);
+  });
+
+  testWidgets('Header collapses into PopupMenu when width <= 800',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      home: MediaQuery(
+        data: const MediaQueryData(size: Size(600, 800)),
+        child: const Scaffold(body: Header()),
+      ),
+    ));
+    await tester.pumpAndSettle();
+
+    // Inline TextButtons should not be present; menu should be present
+    expect(find.byType(TextButton), findsNothing);
+    expect(find.byType(PopupMenuButton<HeaderItem>), findsOneWidget);
+
+    // Open the popup menu and verify items are present
+    await tester.tap(find.byIcon(Icons.menu));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Home'), findsOneWidget);
+    expect(find.text('Shop'), findsOneWidget);
+    expect(find.text('The Print Shack'), findsOneWidget);
+    expect(find.text('SALE!'), findsOneWidget);
+    expect(find.text('About Us'), findsOneWidget);
+  });
+
 }

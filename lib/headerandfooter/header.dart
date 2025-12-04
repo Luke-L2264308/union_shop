@@ -19,9 +19,11 @@ class Header extends StatelessWidget {
   void navigateToAboutUs(BuildContext context) {
     Navigator.pushNamed(context, '/aboutus');
   }
+
   void navigateToSignIn(BuildContext context) {
     Navigator.pushNamed(context, '/signin');
   }
+
   void navigateToCart(BuildContext context) {
     Navigator.pushNamed(context, '/cart');
   }
@@ -89,16 +91,21 @@ class Header extends StatelessWidget {
             ),
           ),
           // Main header
-          Expanded(
+          Flexible(
+            
             child: Container(
+              
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      navigateToHome(context);
-                    },
-                    // Logo
+                  Flexible(
+                    fit: FlexFit.loose,
+                    child: GestureDetector(
+                      onTap: () {
+                        navigateToHome(context);
+                      },
+                      // Logo
                     child: Image.network(
                       'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
                       height: 18,
@@ -115,8 +122,7 @@ class Header extends StatelessWidget {
                         );
                       },
                     ),
-                  ),
-                  
+                  ),),
                   if (MediaQuery.of(context).size.width > 800) ...[
                     for (int i = 0; i < buildHeaderButtons(context).length; i++)
                       buildHeaderButtons(context)[i],
@@ -145,10 +151,8 @@ class Header extends StatelessWidget {
                                   .toList();
                             },
                             onSelected: (item) => item.onPressed(),
-                          
                           )
                         ],
-                        
                       ],
                     ),
                   ),
