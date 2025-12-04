@@ -69,6 +69,35 @@ void main() {
     expect(find.text('About Us'), findsOneWidget);
   });
 
+  testWidgets(
+      'Selecting item from PopupMenu triggers onSelected callback (narrow layout)',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      initialRoute: '/start',
+      routes: {
+        '/start': (ctx) => MediaQuery(
+              data: const MediaQueryData(size: Size(600, 800)),
+              child: const Scaffold(body: Header()),
+            ),
+        '/product': (ctx) =>
+            const Scaffold(body: Center(child: Text('Product Page'))),
+      },
+    ));
+    await tester.pumpAndSettle();
+
+    // Open the popup menu
+    await tester.tap(find.byIcon(Icons.menu));
+    await tester.pumpAndSettle();
+
+    // Tap the 'Shop' entry in the popup menu
+    expect(find.text('Shop'), findsOneWidget);
+    await tester.tap(find.text('Shop'));
+    await tester.pumpAndSettle();
+
+    // Expect navigation to /product
+    expect(find.text('Product Page'), findsOneWidget);
+  });
+
   testWidgets('Clicking Shop navigates to /product',
       (WidgetTester tester) async {
     await tester.pumpWidget(MaterialApp(

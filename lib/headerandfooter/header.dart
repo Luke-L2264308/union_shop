@@ -30,7 +30,6 @@ class Header extends StatelessWidget {
 
   void placeholderCallbackForButtons() {}
 
-  void menuButtonCallback() {}
 
   List<HeaderItem> buildHeaderItems(BuildContext context) {
     return [
@@ -82,10 +81,16 @@ class Header extends StatelessWidget {
                   buildIconButton(Icons.arrow_back_ios, () {
                     Navigator.pop(context);
                   }),
-                const Text(
-                  'PLACEHOLDER HEADER TEXT',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Text(
+                      'BLACK FRIDAY SALE, UP TO 50% OFF SELECTED ITEMS!',
+                      textAlign: TextAlign.center,
+                      softWrap: true,
+                      style: const TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                  ),
                 ),
               ],
             ),
