@@ -37,5 +37,20 @@ void main() {
 
     // Sign-in page
     await pushAndExpect('/signin', SignInPage);
+
+    await pushAndExpect('/collection/autumn-favourites',
+        AutumnFavouritesPage); 
+
+    await pushAndExpect('/collection/black-friday',
+        BlackFridayPage);
+    await pushAndExpect('/collection/clothing',
+        ClothingPage);
+    await pushAndExpect('/collection/graduation',
+        GraduationPage);
+    await pushAndExpect('/collection/merchandise',
+        MerchandisePage);
+    await pushAndExpect('/collection/personalisation',
+        PersonalisationPage);
+    
   });
 }
