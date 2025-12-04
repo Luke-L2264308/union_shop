@@ -112,7 +112,29 @@ testWidgets('Clicking About Us navigates to /aboutus',
 
     expect(find.text('About Us Page'), findsOneWidget);
   });
+testWidgets(
+      'Clicking Home navigates to / (root) with pushNamedAndRemoveUntil',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      initialRoute: '/start',
+      routes: {
+        '/start': (ctx) => MediaQuery(
+              data: const MediaQueryData(size: Size(1200, 800)),
+              child: const Scaffold(body: Header()),
+            ),
+        '/': (ctx) => const Scaffold(body: Center(child: Text('Home Page'))),
+      },
+    ));
+    await tester.pumpAndSettle();
 
+    expect(find.text('Home'), findsOneWidget);
+    await tester.tap(find.text('Home'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Home Page'), findsOneWidget);
+  });
+
+  
   
 }
 
