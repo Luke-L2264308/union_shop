@@ -69,13 +69,7 @@ class _ProductPageState extends State<ProductPage> {
           'addedAt': DateTime.now().toIso8601String(),
         };
 
-        // Try to merge with existing cart entry (match on title + size + colour).
-        // Requires helper functions in cart_storage.dart:
-        //   Future<List<Map<String,dynamic>>> readCartItems()
-        //   Future<void> writeCartItems(List<Map<String,dynamic>> items)
-        //
-        // If those helpers don't exist, add them to cart_storage.dart (read/write a JSON
-        // list or newline-delimited JSON). If you prefer, move merging logic into cart_storage.dart.
+        
         try {
           List<Map<String, dynamic>> existing = [];
           try {
@@ -103,8 +97,7 @@ class _ProductPageState extends State<ProductPage> {
           await appendCartItem(item);
         }
       } catch (e, st) {
-        // Log failure but don't crash the UI
-        // ignore: avoid_print
+        
         print('Failed to write cart storage: $e\n$st');
       }
     }();
@@ -260,50 +253,57 @@ class _ProductPageState extends State<ProductPage> {
                         physics: const NeverScrollableScrollPhysics(),
                         children: [
                           if (colours.isNotEmpty) ...[
-                            Column(
-                              children: [
-                                const Text('Colours Available:'),
-                                DropdownMenu<String>(
-                                  initialSelection: _colourSelected,
-                                  dropdownMenuEntries:
-                                      _buildDropdownEntries("colours"),
-                                  onSelected: (String? v) =>
-                                      setState(() => _colourSelected = v),
-                                ),
-                              ],
-                            ),
-                          ],
-                          if (sizes.isNotEmpty) ...[
-                            Column(
-                              children: [
-                                const Text('Sizes Available:'),
-                                DropdownMenu<String>(
-                                    initialSelection: _sizeSelected,
-                                    dropdownMenuEntries:
-                                        _buildDropdownEntries("sizes"),
-                                    onSelected: (String? v) =>
-                                        setState(() => _sizeSelected = v)),
-                              ],
-                            )
-                          ],
-                          Column(
-                            children: [
-                              const Text('Quantity: '),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                            FittedBox(
+                              child: Column(
+                                
                                 children: [
-                                  IconButton(
-                                    onPressed: _decreaseQuantity,
-                                    icon: const Icon(Icons.remove),
-                                  ),
-                                  Text('$_quantity'.toString()),
-                                  IconButton(
-                                    onPressed: _increaseQuantity,
-                                    icon: const Icon(Icons.add),
+                                  const Text('Colours Available:'),
+                                  DropdownMenu<String>(
+                                    initialSelection: _colourSelected,
+                                    dropdownMenuEntries:
+                                        _buildDropdownEntries("colours"),
+                                    onSelected: (String? v) =>
+                                        setState(() => _colourSelected = v),
                                   ),
                                 ],
                               ),
-                            ],
+                            ),
+                          ],
+                          if (sizes.isNotEmpty) ...[
+                            FittedBox(
+                              child: Column(
+                                children: [
+                                  const Text('Sizes Available:'),
+                                  DropdownMenu<String>(
+                                      initialSelection: _sizeSelected,
+                                      dropdownMenuEntries:
+                                          _buildDropdownEntries("sizes"),
+                                      onSelected: (String? v) =>
+                                          setState(() => _sizeSelected = v)),
+                                ],
+                              ),
+                            )
+                          ],
+                          FittedBox(
+                            child: Column(
+                              children: [
+                                const Text('Quantity: '),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    IconButton(
+                                      onPressed: _decreaseQuantity,
+                                      icon: const Icon(Icons.remove),
+                                    ),
+                                    Text('$_quantity'.toString()),
+                                    IconButton(
+                                      onPressed: _increaseQuantity,
+                                      icon: const Icon(Icons.add),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ]),
                     ElevatedButton.icon(
