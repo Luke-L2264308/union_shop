@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/productpagetemplates/collections_list.dart' show loadCollections;
 import 'package:union_shop/productpagetemplates/product_page.dart';
 
-class AutumnKnitScarfPage extends StatelessWidget {
-  const AutumnKnitScarfPage({super.key, required this.routeName});
+class CollectionItemPage extends StatelessWidget {
+  const CollectionItemPage({super.key, required this.routeName});
   final String routeName;
   List<String> get routeNames => routeName.split('/');
   @override

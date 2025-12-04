@@ -51,7 +51,7 @@ class UnionShopApp extends StatelessWidget {
       if (uri.pathSegments.length >= 3 && uri.pathSegments[0] == 'collection') {
         return MaterialPageRoute(
           settings: settings,
-          builder: (_) => AutumnKnitScarfPage(routeName: name),
+          builder: (_) => CollectionItemPage(routeName: name),
         );
       }
       return null; // fall back to routes map or default

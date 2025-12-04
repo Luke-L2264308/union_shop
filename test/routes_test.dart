@@ -4,6 +4,7 @@ import 'package:union_shop/main.dart' show UnionShopApp;
 import 'package:union_shop/pageswithoutproducts/aboutus_page.dart';
 import 'package:union_shop/productpagetemplates/collections_list.dart';
 import 'package:union_shop/pageswithoutproducts/signin.dart';
+import 'package:union_shop/helpers/item_pages.dart';
 
 void main() {
   testWidgets('Named routes push the expected pages',
@@ -38,19 +39,29 @@ void main() {
     // Sign-in page
     await pushAndExpect('/signin', SignInPage);
 
-    await pushAndExpect('/collection/autumn-favourites',
-        AutumnFavouritesPage); 
+    await pushAndExpect('/collection/autumn-favourites', AutumnFavouritesPage);
 
-    await pushAndExpect('/collection/black-friday',
-        BlackFridayPage);
-    await pushAndExpect('/collection/clothing',
-        ClothingPage);
-    await pushAndExpect('/collection/graduation',
-        GraduationPage);
-    await pushAndExpect('/collection/merchandise',
-        MerchandisePage);
-    await pushAndExpect('/collection/personalisation',
-        PersonalisationPage);
-    
+    await pushAndExpect('/collection/black-friday', BlackFridayPage);
+    await pushAndExpect('/collection/clothing', ClothingPage);
+    await pushAndExpect('/collection/graduation', GraduationPage);
+    await pushAndExpect('/collection/merchandise', MerchandisePage);
+    await pushAndExpect('/collection/personalisation', PersonalisationPage);
+
+    // onGenerateRoute: deep collection route -> AutumnKnitScarfPage
+    const deepRoute = '/collection/autumn-favourites/some-scarf';
+    Navigator.of(navigatorContext).pushNamed(deepRoute);
+    await tester.pumpAndSettle();
+
+    // The generated route should create an AutumnKnitScarfPage instance
+    expect(find.byType(CollectionItemPage), findsOneWidget);
+
+    // Confirm the routeName passed into the page matches the pushed route
+    final pageWidget =
+        tester.widget<CollectionItemPage>(find.byType(CollectionItemPage));
+    expect(pageWidget.routeName, equals(deepRoute));
+
+    // Pop back to home
+    Navigator.of(navigatorContext).pop();
+    await tester.pumpAndSettle();
   });
 }
