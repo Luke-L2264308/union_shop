@@ -112,7 +112,5 @@ flutter test test/productpagetemplates/product_dropdown_test.dart --reporter exp
 
 
 
-Contribution guidelines:
-- If you'd like to contribute, please open an issue first to discuss proposed changes and submit pull requests against `main`.
 
 
