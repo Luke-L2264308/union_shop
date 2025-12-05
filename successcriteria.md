@@ -3,34 +3,32 @@
 This document lists clear, testable success criteria derived from the project README and marking criteria. Use these as a checklist while developing and before demo/submission.
 
 ## General / Submission
-- [ ] Repository named `union_shop` and fork is public and accessible
+- [X ] Repository named `union_shop` and fork is public and accessible
 - [ ] Submit fork URL on Moodle before the deadline
-- [ ] Application runs from a fresh clone (instructions in `README.md`)
-- [ ] Able to run the app in Chrome mobile view via `flutter run -d chrome`
+- [X ] Application runs from a fresh clone (instructions in `README.md`)
+- [X ] Able to run the app in Chrome mobile view via `flutter run -d chrome`
 
-## Demo Requirements
-- [ ] Demonstrate implemented features in a 10-minute live demo
-- [ ] The app runs from a fresh clone during the demo
+
 
 ## Basic Features (target: 40% of application marks)
-- [ ] Static homepage present with header, hero and products section (mobile view)
-- [ ] Static navbar present with menu and icons (mobile view)
-- [ ] About Us page accessible
-- [ ] Footer present on at least one page with dummy links/info
-- [ ] Collections page (hardcoded/dummy) showing collections
-- [ ] Collection page showing products with dropdowns/filters (UI present)
-- [ ] Product page showing product details, images, and controls (UI present)
-- [ ] Sale collection page present with discounted price display
-- [ ] Authentication UI (login/signup screens) present (UI only acceptable)
+- [X ] Static homepage present with header, hero and products section (mobile view)
+- [ X] Static navbar present with menu and icons (mobile view)
+- [X ] About Us page accessible
+- [ X] Footer present on at least one page with dummy links/info
+- [ X] Collections page (hardcoded/dummy) showing collections
+- [ X ] Collection page showing products with dropdowns/filters (UI present)
+- [ X] Product page showing product details, images, and controls (UI present)
+- [ X  ] Sale collection page present with discounted price display
+- [ X ] Authentication UI (login/signup screens) present (UI only acceptable)
 
 ## Intermediate Features (target: 35% of application marks)
-- [ ] Navigation works across pages (buttons, navbar, and routes)
-- [ ] Collections populated from local data models/services with sorting/filter UI
-- [ ] Collection listings display correctly from data models/services
-- [ ] Product pages populated from models with functioning dropdowns and counters
-- [ ] Shopping cart: add items, view cart page, edit quantities and remove items
+- [  ] Navigation works across pages (buttons, navbar, and routes)
+- [ X] Collections populated from local data models/services with sorting/filter UI
+- [ X] Collection listings display correctly from data models/services
+- [X ] Product pages populated from models with functioning dropdowns and counters
+- [ X] Shopping cart: add items, view cart page, edit quantities and remove items
 - [ ] Personalisation page updates form dynamically based on selections
-- [ ] Responsiveness: app adapts layout for mobile and wider screens
+- [ X] Responsiveness: app adapts layout for mobile and wider screens
 
 ## Advanced Features (target: 25% of application marks)
 - [ ] Full authentication and account management implemented (external providers acceptable)
@@ -38,21 +36,21 @@ This document lists clear, testable success criteria derived from the project RE
 - [ ] Working search system integrated into navbar and pages
 
 ## Software Development Practices (25% of marks)
-- [ ] Regular, small, meaningful commits with clear messages
-- [ ] Comprehensive and accurate `README.md` documenting setup and external services
-- [ ] Tests covering major UI and logic paths; tests pass locally (`flutter test`)
+- [X ] Regular, small, meaningful commits with clear messages
+- [X ] Comprehensive and accurate `README.md` documenting setup and external services
+- [ X] Tests covering major UI and logic paths; tests pass locally (`flutter test`)
 - [ ] Integration with at least two external services documented in README
-- [ ] Code formatted and free of analyzer errors/warnings
+- [ X] Code formatted and free of analyzer errors/warnings
 
 ## Testing / CI / Test Environment
 - [ ] Widget tests do not depend on real network resources (network/image calls mocked)
-- [ ] All tests pass locally with `flutter test`
+- [ X] All tests pass locally with `flutter test`
 - [ ] Network images in tests are wrapped using a mock helper or `HttpOverrides`
 
 ## Quality / Non-functional
-- [ ] UI is functional and usable on mobile view
-- [ ] No runtime errors when navigating implemented pages
-- [ ] Images used are copyright-free or AI-generated and documented in README
+- [ X] UI is functional and usable on mobile view
+- [ X] No runtime errors when navigating implemented pages
+- [X ] Images used are copyright-free or AI-generated and documented in README
 
 ---
 
