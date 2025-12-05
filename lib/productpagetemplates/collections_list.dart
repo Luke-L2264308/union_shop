@@ -85,19 +85,31 @@ List<Widget> buildProductCards(List<Map<String, dynamic>> collections,
     collections
         .sort((a, b) => b['title'].toString().compareTo(a['title'].toString()));
   } else if (sortBy == 'priceLowHigh') {
-    collections.sort(
-        (a, b) => (a['price'].toString()).compareTo(b['price'].toString()));
+    double effectivePrice(Map<String, dynamic> item) {
+      final rp = item['reducedprice'];
+      final p = item['price'];
+      return double.tryParse(rp?.toString() ?? '') ??
+             double.tryParse(p?.toString() ?? '') ??
+             0.0;
+    }
+    collections.sort((a, b) => effectivePrice(a).compareTo(effectivePrice(b)));
   } else if (sortBy == 'priceHighLow') {
-    collections.sort(
-        (a, b) => (b['price'].toString()).compareTo(a['price'].toString()));
+    double effectivePrice(Map<String, dynamic> item) {
+      final rp = item['reducedprice'];
+      final p = item['price'];
+      return double.tryParse(rp?.toString() ?? '') ??
+             double.tryParse(p?.toString() ?? '') ??
+             0.0;
+    }
+    collections.sort((a, b) => effectivePrice(b).compareTo(effectivePrice(a)));
   }
 
   return collections.map((collection) {
     return ProductCard(
       title: collection['title'],
-      price: collection['price'],
+      price: "£${collection['price']}",
       imageUrl: '${collection['imageLocation']}',
-      reducedprice: collection['reducedprice']?.toString(),
+      reducedprice: collection['reducedprice'] != null ? "£${collection['reducedprice']}" : null,
       routeName: '${collection['routeName']}',
     );
   }).toList();

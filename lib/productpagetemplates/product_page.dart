@@ -197,7 +197,7 @@ class _ProductPageState extends State<ProductPage> {
                     Row(
                       children: [
                       Text(
-                        price,
+                        "£$price",
                         style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -208,7 +208,7 @@ class _ProductPageState extends State<ProductPage> {
                         if (hasReduced) ...[
                           const SizedBox(width: 12),
                           Text(
-                            reduced!,
+                            "£$reduced!",
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,

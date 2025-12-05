@@ -36,7 +36,7 @@ class Header extends StatelessWidget {
           () => Navigator.pushNamedAndRemoveUntil(context, '/', (r) => false)),
       HeaderItem('Shop', () => Navigator.pushNamed(context, '/product')),
       HeaderItem('The Print Shack', () {}),
-      HeaderItem('SALE!', () {}),
+      HeaderItem('SALE!', () => Navigator.pushNamed(context, '/collection/black-friday')),
       HeaderItem('About Us', () => Navigator.pushNamed(context, '/aboutus')),
     ];
   }

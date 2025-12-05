@@ -35,7 +35,7 @@
         {"collectiondescription": "Cozy up with our handpicked autumn favourites."},
         {
             "title": "Autumn Knit Scarf",
-            "price": "£29.99", "reducedprice": "£24.99",
+            "price": "29.99", "reducedprice": "10.99",
             "imageLocation": "assets/images/autumn-favourites/autumn-knit-scarf.png",
             "routeName": "/collection/autumn-favourites/autumn-knit-scarf", 
             "description": "Cozy up with our autumn knit scarf, perfect for chilly days.", "sizes": [],
@@ -43,7 +43,7 @@
         },
         {
             "title": "Leaf Print Sweater",
-            "price": "£49.50", 
+            "price": "49.50", 
             "imageLocation": "assets/images/autumn-favourites/leaf-print-sweater.png",
             "routeName": "/collection/autumn-favourites/leaf-print-sweater",
             "description": "Stay warm and stylish with our leaf print sweater, a perfect autumn essential.",
@@ -51,7 +51,7 @@
         },
         {
             "title": "Corduroy Jacket",
-            "price": "£79.00",
+            "price": "79.00",
             "imageLocation": "assets/images/autumn-favourites/corduroy-jacket.png",
             "routeName": "/collection/autumn-favourites/corduroy-jacket",
             "description": "A stylish corduroy jacket perfect for layering in cooler weather.",
@@ -59,7 +59,7 @@
         },
         {
             "title": "Amber Scent Candle",
-            "price": "£15.00", 
+            "price": "15.00", 
             "imageLocation": "assets/images/autumn-favourites/amber-scent-candle.png",
             "routeName": "/collection/autumn-favourites/amber-scent-candle",
             "description": "Fill your space with the warm and inviting aroma of our amber scent candle.", "sizes": [],
@@ -67,7 +67,7 @@
         },
         {
             "title": "Wool Beanie",
-            "price": "£12.99",
+            "price": "12.99",
             "imageLocation": "assets/images/autumn-favourites/wool-beanie.png",
             "routeName": "/collection/autumn-favourites/wool-beanie",
             "description": "Keep warm with our cozy wool beanie, a perfect accessory for autumn.", "sizes": [], "colours": ["Grey", "Navy", "Black"]
@@ -78,35 +78,35 @@
         {"collectiondescription": "Don't miss out on our biggest Black Friday deals."},
         {
             "title": "Noise Cancelling Headphones",
-            "price": "£199.99", "reducedprice": "£149.99",
+            "price": "199.99", "reducedprice": "149.99",
             "imageLocation": "assets/images/black-friday/noise-cancelling-headphones.png",
             "routeName": "/collection/black-friday/noise-cancelling-headphones",
             "description": "Experience immersive sound with our noise-cancelling headphones, perfect for focus and relaxation.", "sizes": [], "colours": []
         },
         {
             "title": "4K Smart TV 55\"",
-            "price": "£399.00", "reducedprice": "£349.00",
+            "price": "399.00", "reducedprice": "5.00",
             "imageLocation": "assets/images/black-friday/4k-smart-tv-55.png",
             "routeName": "/collection/black-friday/4k-smart-tv-55",
             "description": "Enjoy stunning visuals with our 55-inch 4K Smart TV, perfect for your home entertainment.", "sizes": [], "colours": []
         },
         {
             "title": "Gaming Mouse",
-            "price": "£39.99", "reducedprice": "£29.99",
+            "price": "39.99", "reducedprice": "29.99",
             "imageLocation": "assets/images/black-friday/gaming-mouse.png",
             "routeName": "/collection/black-friday/gaming-mouse",
             "description": "Enhance your gaming experience with our precision gaming mouse.", "sizes": [], "colours": []
         },
         {
             "title": "Leather Wallet",
-            "price": "£24.99", "reducedprice": "£19.99",
+            "price": "24.99", "reducedprice": "19.99",
             "imageLocation": "assets/images/black-friday/leather-wallet.png",
             "routeName": "/collection/black-friday/leather-wallet",
             "description": "A sleek and durable leather wallet to keep your essentials organized.", "sizes": [], "colours": []
         },
         {
             "title": "Portable Charger 10000mAh",
-            "price": "£19.50", "reducedprice": "£14.99",
+            "price": "19.50", "reducedprice": "14.99",
             "imageLocation": "assets/images/black-friday/portable-charger-10000mah.png",
             "routeName": "/collection/black-friday/portable-charger-10000mah",
             "description": "Keep your devices powered on the go with our high-capacity portable charger.", "sizes": [], "colours": []
@@ -116,35 +116,35 @@
         {"collectiondescription": "Explore our latest clothing collections."},
         {
             "title": "Classic Logo T Shirt",
-            "price": "£18.00",
+            "price": "18.00",
             "imageLocation": "assets/images/clothing/clothing-tee.png",
             "routeName": "/collection/clothing/classic-logo-t-shirt",
             "description": "A comfortable classic logo t-shirt made from soft cotton.", "sizes": ["S", "M", "L", "XL"], "colours": ["Red", "Blue", "Black", "White"]
         },
         {
             "title": "Denim Jeans",
-            "price": "£59.99",
+            "price": "59.99",
             "imageLocation": "assets/images/clothing/clothing-jeans.png",
             "routeName": "/collection/clothing/denim-jeans",
             "description": "Durable and stylish denim jeans for everyday wear.", "sizes": ["28", "30", "32", "34", "36"], "colours": ["Blue", "Black"]
         },
         {
             "title": "Zip Hoodie",
-            "price": "£45.00",
+            "price": "45.00",
             "imageLocation": "assets/images/clothing/clothing-hoodie.png",
             "routeName": "/collection/clothing/zip-hoodie",
             "description": "A warm and comfortable zip-up hoodie, perfect for layering.", "sizes": ["S","M", "L", "XL"], "colours": ["Blue", "Grey", "Black"]
         },
         {
             "title": "Summer Dress",
-            "price": "£34.50",
+            "price": "34.50",
             "imageLocation": "assets/images/clothing/clothing-dress.png",
             "routeName": "/collection/clothing/summer-dress",
             "description": "A light and breezy summer dress, perfect for warm days.", "sizes": ["10", "12", "14", "16"], "colours": ["Yellow", "Pink", "White"]
         },
         {
             "title": "Athletic Shorts",
-            "price": "£22.00",
+            "price": "22.00",
             "imageLocation": "assets/images/clothing/clothing-shorts.png",
             "routeName": "/collection/clothing/athletic-shorts",
             "description": "Comfortable and breathable athletic shorts, ideal for workouts and casual wear.", "sizes": ["S", "M", "L", "XL"], "colours": ["Grey", "Black", "Navy"]
@@ -154,35 +154,35 @@
         {"collectiondescription": "Celebrate your achievements with our graduation collection."},
         {
             "title": "Graduation Gown",
-            "price": "£89.99",
+            "price": "89.99",
             "imageLocation": "assets/images/graduation/graduation-gown.png",
             "routeName": "/collection/graduation/graduation-gown",
             "description": "A traditional graduation gown to celebrate your academic achievements.", "sizes": ["S", "M", "L", "XL"], "colours": []
         },
         {
             "title": "Cap and Tassel Set",
-            "price": "£24.99",
+            "price": "24.99",
             "imageLocation": "assets/images/graduation/cap-tassel-set.png",
             "routeName": "/collection/graduation/cap-and-tassel-set",
             "description": "A classic cap and tassel set to complete your graduation attire.", "sizes": [], "colours": []
         },
         {
             "title": "Class Ring",
-            "price": "£129.00",
+            "price": "129.00",
             "imageLocation": "assets/images/graduation/class-ring.png",
             "routeName": "/collection/graduation/class-ring",
             "description": "A stylish class ring to commemorate your graduation.", "sizes": [], "colours": []
         },
         {
             "title": "Memory Photo Book",
-            "price": "£39.50",
+            "price": "39.50",
             "imageLocation": "assets/images/graduation/memory-photo-book.png",
             "routeName": "/collection/graduation/memory-photo-book",
             "description": "A photo book to preserve your cherished graduation memories.", "sizes": [], "colours": ["Blue", "Black", "Grey"]
         },
         {
             "title": "Personalised Diploma Frame",
-            "price": "£49.99",
+            "price": "49.99",
             "imageLocation": "assets/images/graduation/personalised-diploma-frame.png",
             "routeName": "/collection/graduation/personalised-diploma-frame",
             "description": "A personalised frame to proudly display your diploma.", "sizes": [], "colours": []
@@ -192,35 +192,35 @@
         {"collectiondescription": "Check out our exclusive merchandise."},
         {
             "title": "Logo Mug",
-            "price": "£9.99",
+            "price": "9.99",
             "imageLocation": "assets/images/merchandise/logo-mug.png",
             "routeName": "/collection/merchandise/logo-mug",
             "description": "A ceramic mug featuring the company logo, perfect for your morning coffee.", "sizes": [], "colours": ["Black", "White"," Blue","Red","Green"]
         },
         {
             "title": "Sticker Pack (10)",
-            "price": "£4.50",
+            "price": "4.50",
             "imageLocation": "assets/images/merchandise/sticker-pack.png",
             "routeName": "/collection/merchandise/sticker-pack",
             "description": "A pack of 10 stickers featuring various designs.", "sizes": [], "colours": []
         },
         {
             "title": "Enamel Pin",
-            "price": "£6.99",
+            "price": "6.99",
             "imageLocation": "assets/images/merchandise/enamel-pin.png",
             "routeName": "/collection/merchandise/enamel-pin",
             "description": "A stylish enamel pin to accessorize your outfits.", "sizes": [], "colours": []
         },
         {
             "title": "Branded Tote Bag",
-            "price": "£14.00",
+            "price": "14.00",
             "imageLocation": "assets/images/merchandise/branded-tote-bag.png",
             "routeName": "/collection/merchandise/branded-tote-bag",
             "description": "A durable tote bag featuring the company logo, perfect for shopping or carrying books.", "sizes": [], "colours": ["White", "Black", "Beige"]
         },
         {
             "title": "Insulated Water Bottle",
-            "price": "£19.99",
+            "price": "19.99",
             "imageLocation": "assets/images/merchandise/insulated-water-bottle.png",
             "routeName": "/collection/merchandise/insulated-water-bottle",
             "description": "An insulated water bottle to keep your drinks hot or cold for hours." , "sizes": [], "colours": ["Silver", "Black", "Blue"]
@@ -230,35 +230,35 @@
         {"collectiondescription": "Add a personal touch with our customisation options."},
         {
             "title": "Custom Name Hoodie",
-            "price": "£39.99",
+            "price": "39.99",
             "imageLocation": "assets/images/personalisation/custom-name-hoodie.png",
             "routeName": "/collection/personalisation/custom-name-hoodie",
             "description": "A hoodie that can be customised with your name for a personal touch.", "sizes": ["S", "M", "L", "XL"], "colours": ["Red", "Blue", "Green", "Black"]
         },
         {
             "title": "Monogrammed Wallet",
-            "price": "£34.00",
+            "price": "34.00",
             "imageLocation": "assets/images/personalisation/monogrammed-wallet.png",
             "routeName": "/collection/personalisation/monogrammed-wallet",
             "description": "A wallet that can be monogrammed with your initials for a unique touch.", "sizes": [], "colours": []
         },
         {
             "title": "Personalised Necklace",
-            "price": "£49.50",
+            "price": "49.50",
             "imageLocation": "assets/images/personalisation/personalised-necklace.png",
             "routeName": "/collection/personalisation/personalised-necklace",
             "description": "A necklace that can be personalised with your choice of text or design.", "sizes": [], "colours": []
         },
         {
             "title": "Engraved Pen",
-            "price": "£12.99",
+            "price": "12.99",
             "imageLocation": "assets/images/personalisation/engraved-pen.png",
             "routeName": "/collection/personalisation/engraved-pen",
             "description": "A pen that can be engraved with your name or a special message.", "sizes": [], "colours": []
         },
         {
             "title": "Custom Phone Case",
-            "price": "£19.99",
+            "price": "19.99",
             "imageLocation": "assets/images/personalisation/custom-phone-case.png",
             "routeName": "/collection/personalisation/custom-phone-case",
             "description": "A phone case that can be customised with your choice of design or text.", "sizes": [], "colours": []
