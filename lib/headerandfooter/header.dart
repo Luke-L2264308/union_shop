@@ -30,7 +30,6 @@ class Header extends StatelessWidget {
 
   void placeholderCallbackForButtons() {}
 
-
   List<HeaderItem> buildHeaderItems(BuildContext context) {
     return [
       HeaderItem('Home',
@@ -65,6 +64,9 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ModalRoute<dynamic>? modalRoute = ModalRoute.of(context);
+    final bool showBack =
+        (modalRoute?.settings.name != '/' && (modalRoute?.canPop ?? false));
     return Container(
       height: 100,
       color: Colors.white,
@@ -77,7 +79,7 @@ class Header extends StatelessWidget {
             color: const Color(0xFF4d2963),
             child: Row(
               children: [
-                if (Navigator.canPop(context))
+                if (showBack)
                   buildIconButton(Icons.arrow_back_ios, () {
                     Navigator.pop(context);
                   }),
@@ -97,9 +99,7 @@ class Header extends StatelessWidget {
           ),
           // Main header
           Flexible(
-            
             child: Container(
-              
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -111,23 +111,24 @@ class Header extends StatelessWidget {
                         navigateToHome(context);
                       },
                       // Logo
-                    child: Image.network(
-                      'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                      height: 18,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Container(
-                          color: Colors.grey[300],
-                          width: 18,
-                          height: 18,
-                          child: const Center(
-                            child: Icon(Icons.image_not_supported,
-                                color: Colors.grey),
-                          ),
-                        );
-                      },
+                      child: Image.network(
+                        'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
+                        height: 18,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Container(
+                            color: Colors.grey[300],
+                            width: 18,
+                            height: 18,
+                            child: const Center(
+                              child: Icon(Icons.image_not_supported,
+                                  color: Colors.grey),
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                  ),),
+                  ),
                   if (MediaQuery.of(context).size.width > 800) ...[
                     for (int i = 0; i < buildHeaderButtons(context).length; i++)
                       buildHeaderButtons(context)[i],
