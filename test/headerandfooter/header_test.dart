@@ -162,6 +162,44 @@ void main() {
     expect(find.text('Home Page'), findsOneWidget);
   });
 
+  testWidgets('Tapping header logo calls navigateToHome and shows root page',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      initialRoute: '/start',
+      routes: {
+        '/start': (ctx) => MediaQuery(
+              data: const MediaQueryData(size: Size(1200, 800)),
+              child: const Scaffold(body: Header()),
+            ),
+        '/': (ctx) => const Scaffold(body: Center(child: Text('Home Page'))),
+      },
+    ));
+    await tester.pumpAndSettle();
+
+    // Find the GestureDetector wrapping the logo Image by looking for a
+    // GestureDetector that contains an Image descendant.
+    final logoGesture = find.byWidgetPredicate((w) {
+      if (w is GestureDetector) {
+        final child = w.child;
+        return child is Image ||
+            (child is SizedBox &&
+                find
+                    .descendant(
+                        of: find.byWidget(child), matching: find.byType(Image))
+                    .evaluate()
+                    .isNotEmpty);
+      }
+      return false;
+    });
+
+    expect(logoGesture, findsOneWidget);
+
+    await tester.tap(logoGesture);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Home Page'), findsOneWidget);
+  });
+
   testWidgets('Clicking Sign In icon navigates to /signin',
       (WidgetTester tester) async {
     await tester.pumpWidget(MaterialApp(
